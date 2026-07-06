@@ -14,9 +14,10 @@ Se eu fosse construir isto do zero, sozinho, otimizando velocidade + qualidade
    monorepo com pipeline de fixtures. **Não escrever UI antes de ver a
    qualidade real dos dados** — é o maior risco do projeto (R2) e o mais
    barato de testar primeiro.
-3. **Stack travada** (doc 06): pnpm monorepo · Next.js/TS na Vercel · worker
-   BullMQ + Redis no Railway · Postgres no Neon · Drizzle · Better Auth ·
-   AI SDK + Claude · Sentry/Axiom/Better Stack.
+3. **Stack travada** (doc 06): pnpm monorepo · Next.js/TS na Vercel (RSC para
+   leitura, Server Actions para mutação) · worker Node/BullMQ + Redis no
+   Railway · Postgres no Supabase-SP (como Postgres puro) · Drizzle · Better
+   Auth · AI SDK (modelo por evals) · Sentry/Axiom/Better Stack.
 4. **Escopo travado** (doc 01): Série A + Copa do Brasil + Libertadores,
    3 temporadas, ao vivo ≤ 60 s, IA com tools fechadas, badges de confiança.
 5. **Sequência**: Fase 1 (PoC de dados) antes de qualquer tela. A pergunta
@@ -100,8 +101,8 @@ resumo das entrevistas, e o golden set inicial de perguntas.
 ## Dia 4 — Schema core + migrations
 - **Objetivo**: SPEC-003.
 - **Tarefas**: schema core/ingest/app em Drizzle; migrations; seed de
-  referência (competições, times da Série A); factories de teste; branch de
-  banco por PR funcionando no Neon.
+  referência (competições, times da Série A); factories de teste; projetos
+  Supabase dev e prod criados (região São Paulo), pooler configurado.
 - **Entregável**: `pnpm db:migrate && pnpm db:seed` do zero, verde.
 - **Decisão**: nenhuma nova — executar o doc 05.
 - **Risco**: sobre-modelar. Regra: só tabelas que o MVP lê ou escreve.

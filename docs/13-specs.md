@@ -34,6 +34,10 @@ excluída não aparece em nenhuma query após purga.
 **CA**: migrations aplicam do zero e são idempotentes; toda tabela de fato tem
 source_provider_id/fetched_at/confidence NOT NULL; fixtures inserem uma rodada
 completa sem violar constraints. **Dep**: 001.
+**Nota técnica (Supabase)**: Next/serverless conecta via pooler (Supavisor,
+transaction mode — Drizzle sem prepared statements); o worker usa conexão
+direta. Funções Vercel em `gru1`, banco em São Paulo. Errar isso só aparece em
+produção — nasce certo aqui.
 
 ## SPEC-004 · Integração com provedor
 **Objetivo**: cliente tipado + normalizadores puros para o provedor escolhido.
@@ -137,11 +141,12 @@ canary de worker; runbooks de incidente; revisão de permissões; pentest leve.
 
 ## SPEC-016 · Ambientes e deploy
 **Objetivo**: doc 07 §8.3/8.5 operacional.
-**Escopo**: projetos Vercel/Railway/Neon; preview com branch de banco por PR
-(criação/destruição via CI); pipeline de migrations expand-contract; smoke
-test pós-deploy; rollback documentado; secrets por ambiente.
-**CA**: PR aberto → preview com banco isolado em < 5 min; migration com erro
-bloqueia deploy; rollback testado uma vez de verdade. **Dep**: 001.
+**Escopo**: projetos Vercel/Railway/Supabase (dev e prod separados); preview
+por PR apontando para o banco dev com seeds idempotentes; pipeline de
+migrations expand-contract; smoke test pós-deploy; rollback documentado;
+secrets por ambiente.
+**CA**: PR aberto → preview funcional em < 5 min; migration com erro bloqueia
+deploy; rollback testado uma vez de verdade. **Dep**: 001.
 
 ## SPEC-017 · Workers e filas
 **Objetivo**: fundação BullMQ do apps/ingest.

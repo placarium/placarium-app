@@ -43,12 +43,14 @@ desenvolvimento. Comece por [docs/16-recomendacoes-e-proximas-acoes.md](docs/16-
 
 - **Monorepo** pnpm: `apps/web` (Next.js), `apps/ingest` (worker Node/BullMQ),
   `packages/db` (Drizzle), `packages/core` (domínio), `packages/ai` (tools).
-- **Infra MVP**: Vercel (web) + Railway (worker + Redis) + Neon (Postgres).
+- **Infra MVP**: Vercel (web) + Railway (worker + Redis) + Supabase
+  (Postgres puro, região São Paulo — sem supabase-js, sem RLS, sem Supabase Auth).
 - **Cobertura MVP**: Brasileirão Série A + Copa do Brasil + Libertadores,
   1 provedor de dados, 3 temporadas de histórico.
 - **Real-time MVP**: polling adaptativo (10–20 s) sobre cache Redis; SSE na V1.
-- **IA**: Vercel AI SDK + Claude, tools tipadas com Zod sobre camada semântica
-  de queries pré-aprovadas. Sem NL→SQL livre.
+- **IA**: Vercel AI SDK com provider plugável (recomendação: Claude), tools
+  tipadas com Zod sobre camada semântica de queries pré-aprovadas. Sem NL→SQL
+  livre. Modelo de produção escolhido por evals na Fase 3, não por fé.
 - **Confiabilidade em primeiro lugar**: todo dado tem origem, timestamp e nível
   de confiança; payloads brutos são arquivados para reprocessamento.
 

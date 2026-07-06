@@ -9,7 +9,7 @@ Componentes e responsabilidades (diagrama completo no doc 06):
 | Web/CDN | Next.js na Vercel | UI, SSR/ISR, API de leitura, rotas de IA, SEO |
 | Worker | Node/BullMQ no Railway | Ingestão, polling ao vivo, consolidação, agregados, quality scan |
 | Filas | BullMQ sobre Redis | Retry, backoff, repeatable jobs, deduplicação de jobs |
-| Banco operacional | Postgres (Neon) | Fonte de verdade |
+| Banco operacional | Postgres (Supabase, São Paulo) | Fonte de verdade |
 | Camada analítica | MVs no mesmo Postgres | Agregados (doc 05) |
 | Cache | Redis (Railway) | Estado ao vivo, respostas quentes, rate limiting |
 | IA | Claude API via AI SDK | Chat com tools fechadas |
@@ -30,9 +30,9 @@ Redis → Claude → usuário, com log em `ai_answer`.
 |---|---|---|---|
 | **Vercel** (web) | Melhor DX Next, preview deploys, CDN, ISR nativo | Funções com limite de duração; custo cresce com tráfego; worker impossível | ✅ para `apps/web` |
 | **Railway** (worker+Redis) | Processos persistentes triviais, Redis no mesmo projeto (latência ~0), logs decentes, preço previsível | Menos maduro que AWS; sem multi-região | ✅ para `apps/ingest` + Redis |
-| **Neon** (Postgres) | Branching por PR (preview com banco isolado!), autoscaling, PITR em planos pagos | Cold start em projetos idle (mitigável); conexões via pooler | ✅ para Postgres |
-| Render / Fly.io | Equivalentes ao Railway | Fly: mais poder, mais atrito operacional | Alternativas válidas, sem vantagem clara |
-| Supabase | Auth+DB+realtime num só lugar | Acopla; realtime deles não casa com nosso fluxo worker-first; menos flexível p/ MVs pesadas | Não, mas defensável |
+| **Supabase** (Postgres) | Região **São Paulo** (colocation com usuários BR e Vercel `gru1`), dashboard excelente para inspecionar dados, backups geridos, free tier generoso | Branching de banco por PR menos maduro que o do Neon (pago); tentação de acoplar em Auth/RLS/Realtime — **usamos só o Postgres**, com disciplina: migrations via Drizzle, zero supabase-js, RLS off | ✅ para Postgres (como Postgres puro) |
+| Neon (Postgres) | Branching por PR (preview com banco isolado), autoscaling | Sem região São Paulo próxima do nosso público na mesma medida; cold start em projetos idle | Alternativa forte; perdemos branching conscientemente (mitigação em §8.3) |
+| Render / Fly.io | Equivalentes ao Railway; **Fly tem região GRU** | Fly: mais poder, mais atrito operacional (Dockerfile, Redis por conta própria) | Fly GRU é o plano de colocation do worker se o atraso de ingestão apertar (§8.2 racional) |
 | AWS/GCP/Azure | Poder total, custo fino em escala | Semanas de setup para um dev solo; overengineering agora | ❌ MVP; candidato na escala |
 | Upstash Redis | Serverless, barato | **Incompatível na prática com BullMQ** (conexões persistentes, custo por comando) | ❌ para filas |
 
@@ -55,12 +55,14 @@ Redis → Claude → usuário, com log em `ai_answer`.
 | Ambiente | Objetivo | Serviços | Dados | IA | Provedor externo |
 |---|---|---|---|---|---|
 | **Local** | Dev diário | Docker Compose: Postgres + Redis; web e worker via pnpm | Seed sintético + fixtures de partidas reais gravadas | Chave dev com cap baixo | **Mock server** (fixtures) por padrão; chave real só sob flag |
-| **Preview** (por PR) | Revisar feature | Vercel preview + **branch Neon efêmera** (criada/destruída por CI); Redis compartilhado de dev com prefixo por PR | Cópia do seed | Chave dev | Mock |
+| **Preview** (por PR) | Revisar feature | Vercel preview + **banco de dev compartilhado** (projeto Supabase separado do prod, seeds idempotentes); Redis compartilhado de dev com prefixo por PR | Seed sintético | Chave dev | Mock |
 | **Produção** | Usuários reais | Vercel prod + Railway prod + Neon main | Reais | Chave prod com caps | Chave real (a única que polla de verdade) |
 
-**Staging dedicado: adiado deliberadamente.** Com um dev, preview-por-PR com
-banco isolado (branching do Neon) cobre 90 % do valor de staging sem o custo de
-manter um ambiente que apodrece. Criar staging quando: houver 2+ devs, ou
+**Staging dedicado: adiado deliberadamente.** Com um dev, preview-por-PR sobre
+um banco de dev compartilhado cobre a maior parte do valor de staging sem o
+custo de manter um ambiente que apodrece. Se o compartilhamento virar dor
+(migrations conflitantes entre PRs), avaliar o branching pago do Supabase — é
+uma dor boa de ter, significa ritmo alto. Criar staging quando: houver 2+ devs, ou
 billing (testar webhooks de Stripe), ou o segundo provedor de dados (testar
 reconciliação com tráfego real). Regra anti-burocracia: cada ambiente novo
 precisa de um dono e de um motivo escrito.
@@ -96,8 +98,8 @@ pnpm test                     # vitest
 
 ## 8.5 Estratégia de deploy
 
-- **Pipeline**: PR → CI (lint, typecheck, vitest, build) → preview deploy +
-  branch de banco → merge em `main` → CI aplica migrations em prod → deploy
+- **Pipeline**: PR → CI (lint, typecheck, vitest, build) → preview deploy
+  (banco dev) → merge em `main` → CI aplica migrations em prod → deploy
   web (Vercel) e worker (Railway) → smoke test (`/api/health` + 1 query de
   leitura + job de teste na fila) → alerta no fail.
 - **Migrations seguras — expand-and-contract obrigatório**: (1) adicionar
@@ -120,8 +122,9 @@ pnpm test                     # vitest
 
 ## 8.6 Banco e ambientes de dados
 
-- **Backups**: Neon PITR (plano pago) + dump lógico semanal para storage
-  externo (não deixar todos os ovos na Neon). Testar restore 1×/trimestre.
+- **Backups**: backups automáticos do Supabase (PITR no plano pago desde que
+  houver produção) + dump lógico semanal para storage externo (não deixar
+  todos os ovos no Supabase). Testar restore 1×/trimestre.
 - **Retenção**: `raw_snapshot` ao vivo 90 dias → arquivar/expurgar; snapshot
   final permanente; logs de IA 12 meses (LGPD, doc 14); `ingestion_job` 6
   meses.
@@ -171,7 +174,7 @@ custo IA diário > teto, migration falhou.
 | Evento duplicado | Stats infladas | `dedup_key` UNIQUE ignora silenciosamente | — | Métrica | P0 (design) |
 | Evento corrigido depois | Timeline muda | supersede + audit + badge (doc 05) | — | Não | P0 (design) |
 | Conflito entre provedores | (V2) | flag `disputed`, exibe fonte primária | Triagem admin | Sim | V2 |
-| Postgres indisponível | Site fora | Páginas ISR sobrevivem em cache; API 503 com retry-after | Neon HA; restore testado | Sim, imediato | P0 |
+| Postgres indisponível | Site fora | Páginas ISR sobrevivem em cache; API 503 com retry-after | HA do Supabase; restore testado | Sim, imediato | P0 |
 | Redis indisponível | Sem ao vivo/cache | **Degradar, não cair**: API cai para Postgres direto (mais lento); polling do cliente continua | Redis é reconstituível (cache-only) | Sim | P1 |
 | Fila travada / worker morto | Ingestão para | Heartbeat + restart automático (Railway); jobs com retry/backoff; DLQ | Reconciliação recupera perdidos | Sim > 5 min | P0 |
 | IA fora do ar | Chat indisponível | Mensagem honesta + resto do site intacto (IA é feature, não fundação) | Retry com backoff; fila de espera | Se > 15 min | P2 |
@@ -218,7 +221,7 @@ de plano) deixou de resolver **duas vezes seguidas** no mesmo gargalo.
 |---|---|---|---|
 | Frontend/web | Vercel | Vercel | Vercel ou containers (custo) |
 | Worker/jobs | Railway (1 serviço, restart automático) | Railway (2+ réplicas, filas separadas live/batch) | Containers (ECS/Cloud Run) |
-| Postgres | Neon (plano pago desde produção: PITR) | Neon + réplica leitura | Gerenciado (RDS/Cloud SQL) se preço/recursos exigirem |
+| Postgres | Supabase SP (plano pago desde produção: PITR) | Supabase + réplica leitura | Gerenciado (RDS/Cloud SQL) ou Postgres próprio se preço/recursos exigirem — saída limpa garantida pela disciplina "Postgres puro" |
 | Redis | Railway | Railway | Gerenciado (ElastiCache/Memorystore) |
 | CI/CD | GitHub Actions + deploys nativos | idem + smoke tests ricos | + canary |
 | Secrets | Cofres Vercel/Railway | idem + rotação formal | Vault/SSM |

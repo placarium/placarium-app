@@ -31,11 +31,11 @@ a única fronteira de deploy que o MVP precisa.
 | UI | Tailwind + shadcn/ui + Recharts | Velocidade de um dev solo; componentes acessíveis | Mantine |
 | API de leitura | Route handlers + Server Actions no próprio Next | Evita 3º deployable; leitura é o caso dominante | Fastify separado — só se a API pública B2B virar produto |
 | Worker | Node + BullMQ | Filas com retry/backoff/repeatable jobs maduras; mesma linguagem | Temporal (poderoso, pesado demais); cron puro (sem retry/observabilidade) |
-| Banco | PostgreSQL 16 (Neon) | Modelo relacional forte, MVs, pg_trgm; Neon: branching por PR | Supabase (bom, mas acopla auth/realtime que resolvemos melhor de outro jeito) |
+| Banco | PostgreSQL (Supabase, região São Paulo) | Postgres gerenciado com dashboard excelente para inspecionar dados; **usado como Postgres puro**: migrations só via Drizzle, sem supabase-js no código, RLS desligado, sem Supabase Auth — saída limpa via pg_dump se um dia migrarmos | Neon (branching de banco por PR é superior para previews — perda consciente; mitigação no doc 07 §8.3) |
 | ORM | Drizzle | SQL-first, migrations explícitas, tipos exatos, leve no worker | Prisma (DX boa, mas engine mais pesada e SQL menos transparente) |
 | Cache/filas | Redis (Railway, mesmo projeto do worker) | BullMQ exige Redis com conexão persistente — **Upstash serverless não serve para BullMQ** | — |
 | Auth | Better Auth | Magic link + OAuth simples, dono da tabela de users no nosso Postgres | Auth.js, Clerk (custo/lock-in) |
-| IA | Vercel AI SDK + Claude (Sonnet como padrão; Haiku para triagem de intenção) | Tool calling tipado com Zod, streaming pronto no App Router | LangChain (abstração excessiva para tools fechadas) |
+| IA | Vercel AI SDK; recomendação inicial Claude (Sonnet conversa, Haiku triagem) | Tool calling tipado com Zod, streaming pronto no App Router; **provider é plugável** — a decisão de modelo de produção sai dos evals da Fase 3 (doc 09), e o dev pode usar tier grátis de qualquer provedor | LangChain (abstração excessiva para tools fechadas) |
 | Observabilidade | Sentry (erros) + pino→Axiom (logs) + Better Stack (uptime) | Cobertura essencial com setup de horas | OTel completo — V1+ |
 | CI/CD | GitHub Actions + deploy nativo Vercel/Railway | Zero manutenção de runner | — |
 
@@ -53,7 +53,7 @@ a única fronteira de deploy que o MVP precisa.
                   leitura│        cache│         tools│
                     ┌────▼─────┐  ┌────▼────┐   ┌─────▼──────────┐
                     │ Postgres │  │  Redis   │   │ packages/ai    │
-                    │  (Neon)  │  │(Railway) │   │ camada semânt. │──► Claude API
+                    │(Supabase)│  │(Railway) │   │ camada semânt. │──► LLM API
                     │ core+MVs │  │live+cache│   │ queries fechad.│
                     └────▲─────┘  └────▲────┘   └────────────────┘
                    writes│      publica│estado
@@ -88,8 +88,8 @@ a única fronteira de deploy que o MVP precisa.
 
 ## Ambientes e CI/CD (detalhado no doc 07)
 
-- PR → lint + typecheck + testes + preview deploy (Vercel) com branch de banco
-  (Neon).
+- PR → lint + typecheck + testes + preview deploy (Vercel) apontando para o
+  banco de dev compartilhado (projeto Supabase separado do de produção).
 - `main` → staging implícito? Não: MVP usa **preview + produção** apenas
   (justificativa no doc 07 §8.3).
 - Migrations: `drizzle-kit` gera SQL revisável; aplicadas por step de CI antes

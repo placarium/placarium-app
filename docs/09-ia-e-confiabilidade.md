@@ -21,8 +21,14 @@ Pergunta → [Guardrails de entrada] → [LLM: planeja e chama tools]
   parâmetros; redigir explicação; sugerir refinamentos; detectar ambiguidade.
 - **Não usar**: calcular estatística (SQL calcula); ranquear/agregar (SQL);
   decidir o que é "confiável" (metadado decide); responder fato sem tool.
-- Modelo: Claude Sonnet para a conversa; Haiku para triagem barata de intenção
-  e moderação de entrada. Avaliar custo real nos evals.
+- Modelo: **recomendação inicial** Claude (Sonnet para a conversa; Haiku para
+  triagem barata de intenção e moderação de entrada) — mas a arquitetura é
+  agnóstica de provedor (AI SDK): as tools, a camada semântica e os evals não
+  mudam. **A decisão de produção sai do golden set** (abaixo), comparando 2–3
+  modelos em alucinação numérica, acerto de tool, qualidade de pt-BR, latência
+  e custo/pergunta. Em dev, tier grátis de qualquer provedor serve — com a
+  ressalva de nunca enviar dados de usuário real a planos que usem prompts
+  para treino (verificar termos).
 
 ## Camada semântica (o coração)
 
