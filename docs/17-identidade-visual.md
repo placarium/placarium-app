@@ -88,6 +88,6 @@ tabelas densas). Nunca serif em labels de UI.
 
 ## Pendências
 
-- [ ] Logo/wordmark (aguarda decisão do novo nome do produto)
+- [ ] Logo/wordmark do Placarium (direções em avaliação pelo fundador)
 - [ ] Validar contraste AA do light mode (`card-yellow` é o caso difícil)
 - [ ] Verificação de contraste automatizada no Storybook/CI (V1)

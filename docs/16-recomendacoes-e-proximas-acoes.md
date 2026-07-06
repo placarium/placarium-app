@@ -5,12 +5,13 @@
 Se eu fosse construir isto do zero, sozinho, otimizando velocidade + qualidade
 + confiabilidade + custo controlado + evolução:
 
-1. **Nome**: **StatsHub** (decisão do fundador em 2026-07-06, substituindo a
-   proposta inicial "Súmula") — direto e autoexplicativo: o hub de
-   estatísticas. Org GitHub `stats-hub` (slug; display name "StatsHub"), repo
-   `stats-hub/stats-hub-monorepo`. Atenção: nome genérico em inglês tem risco
-   maior de colisão de marca/domínio — validar `statshub.com.br`/`.app` e
-   INPI na Fase 0 é ainda mais importante.
+1. **Nome**: **Placarium** (decisão do fundador em 2026-07-06; substituiu
+   "StatsHub", descartado por colisão direta com statshub.com — concorrente
+   ativo no mesmo nicho — e "Súmula") — palavra cunhada, *placar* + *-arium*:
+   o observatório do futebol. Verificado em 2026-07-06: `placarium.com.br` e
+   `placarium.app` livres (RDAP), org GitHub `placarium` livre, zero colisão
+   de produto na web. Repo: `placarium-app`. **Registrar os domínios
+   IMEDIATAMENTE** (disponibilidade é volátil) e validar INPI na Fase 0.
 2. **Semana 1 em duas frentes**: trial de 2 provedores com jogos reais +
    monorepo com pipeline de fixtures. **Não escrever UI antes de ver a
    qualidade real dos dados** — é o maior risco do projeto (R2) e o mais
@@ -90,14 +91,15 @@ resumo das entrevistas, e o golden set inicial de perguntas.
 
 ## Dia 3 — Nome, repositório e fundação
 - **Objetivo**: fundação oficial do projeto.
-- **Tarefas**: verificar domínio statshub.com.br/.app + busca INPI (nome
-  decidido: StatsHub); registrar domínio; monorepo SPEC-001 completo
-  (workspaces, TS, lint, vitest, compose, CI); primeiro deploy "hello" na
-  Vercel + Railway (esteira pronta cedo).
-- **Entregável**: CI verde + deploy dummy nos 2 alvos.
-- **Decisão**: domínio final (o nome já está cravado).
-- **Risco**: nome genérico com colisão de marca — se o INPI/domínio travar,
-  variações: *StatsHub BR*, *TheStatsHub*, *StatsHub.futebol*.
+- **Tarefas**: registrar placarium.com.br (registro.br) e placarium.app +
+  busca INPI (nome decidido: Placarium, verificado livre em 2026-07-06);
+  criar org GitHub `placarium` e transferir o repo; monorepo SPEC-001
+  completo (workspaces, TS, lint, vitest, compose, CI); primeiro deploy
+  "hello" na Vercel + Railway (esteira pronta cedo).
+- **Entregável**: CI verde + deploy dummy nos 2 alvos + domínios registrados.
+- **Decisão**: nenhuma nova — executar.
+- **Risco**: adiar o registro do domínio; disponibilidade é volátil e o nome
+  já está público no repositório.
 
 ## Dia 4 — Schema core + migrations
 - **Objetivo**: SPEC-003.

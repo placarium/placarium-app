@@ -78,7 +78,7 @@ precisa de um dono e de um motivo escrito.
 ## 8.4 Setup local
 
 ```bash
-git clone git@github.com:stats-hub/stats-hub-monorepo.git && cd stats-hub-monorepo
+git clone git@github.com:placarium/placarium-app.git && cd placarium-app
 pnpm install
 cp .env.example .env          # preencher 3–4 chaves mínimas
 pnpm dev:services             # docker compose up -d (postgres + redis)

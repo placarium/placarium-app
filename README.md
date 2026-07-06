@@ -1,15 +1,17 @@
-# StatsHub
+# Placarium
 
-> Tudo que acontece em campo — com fonte, timestamp e nível de confiança.
+> O observatório do futebol — tudo que acontece em campo, com fonte,
+> timestamp e nível de confiança.
 
-**StatsHub** é uma plataforma web de dados, analytics e IA para futebol: jogos
-ao vivo, histórico auditável, estatísticas cruzadas por múltiplas dimensões
-(time, jogador, árbitro, estádio, campeonato, confronto) e uma camada de IA
-conversacional que **nunca inventa estatística** — toda resposta vem de
-ferramentas que consultam dados rastreáveis.
+**Placarium** é uma plataforma web de dados, analytics e IA para futebol:
+jogos ao vivo, histórico auditável, estatísticas cruzadas por múltiplas
+dimensões (time, jogador, árbitro, estádio, campeonato, confronto) e uma
+camada de IA conversacional que **nunca inventa estatística** — toda resposta
+vem de ferramentas que consultam dados rastreáveis.
 
-O nome diz o que o produto é: o **hub de estatísticas** — o lugar único onde
-dado de futebol confiável, auditável e cruzável mora.
+O nome funde *placar* + *-arium* (planetário, aquário): o lugar onde o
+futebol é **observado e estudado** — não mais um site de placar, e sim o
+observatório onde o dado confiável, auditável e cruzável mora.
 
 ## Estado do projeto
 
