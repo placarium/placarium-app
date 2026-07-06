@@ -1,97 +1,93 @@
 # 19. Identidade visual — paleta de cores
 
+## Decisão
+
+**Direção escolhida pelo fundador (2026-07-06): C — "Imprensa esportiva"**,
+com refinamento técnico para resolver o conflito entre a cor de marca e as
+cores semânticas (abaixo). As direções A ("Radar", azul) e B ("Gramado
+noturno", verde) foram consideradas e descartadas; ficam como referência para
+temas alternativos futuros.
+
 ## Restrição de projeto (vem antes do gosto)
 
-Num produto de estatística de futebol, **as cores semânticas são sagradas e
-inegociáveis**: cartão amarelo É amarelo, cartão vermelho/derrota É vermelho,
-vitória É verde, e os badges de confiança (doc 10) precisam de verde/âmbar/
-azul/laranja legíveis. Logo, **a cor de marca não pode competir com elas** —
-isso elimina verde, vermelho, amarelo e laranja como primária. Sobram as
-famílias azul/ciano/violeta. Não é coincidência que a direção recomendada seja
-azul: além de não colidir, azul comunica exatamente o nosso posicionamento
-(confiabilidade, dado auditável).
+Num produto de estatística de futebol, **as cores semânticas são sagradas**:
+cartão amarelo É amarelo, vermelho É derrota/expulsão, verde É vitória. A
+direção C usa família quente (âmbar/laranja) como marca, o que exige duas
+regras a mais que as outras direções não exigiriam:
 
-Dark mode é o padrão (uso noturno dominante); light mode derivado dos mesmos
-tokens.
+1. **A marca é laranja queimado, nunca âmbar/amarelo** — hue claramente
+   deslocado do amarelo de cartão.
+2. **Codificação por forma é obrigatória**: cartão amarelo sempre renderiza
+   como chip em formato de cartão (retângulo vertical), nunca como dot ou
+   texto colorido; badges têm ícone + label; a marca vive em botões/links.
+   Cor nunca é o único canal — em C isso deixa de ser só acessibilidade e
+   vira condição de legibilidade.
 
-## Direções propostas
+## Tokens — Direção C refinada
 
-### Direção A — "Radar" (RECOMENDADA)
-
-Grafite azulado + azul elétrico + ciano para dados. Sóbrio, técnico, diferencia
-dos concorrentes (Flashscore = vermelho, FotMob = verde, SofaScore = azul
-claro; o nosso é mais escuro e elétrico).
+Dark mode padrão (antracite quente); light mode derivado.
 
 | Token | Dark (padrão) | Light | Uso |
 |---|---|---|---|
-| `bg` | `#0A0F1C` | `#F6F8FB` | Fundo da página |
-| `surface` | `#111827` | `#FFFFFF` | Cards, tabelas |
-| `surface-2` | `#1A2332` | `#EEF2F7` | Hover, células alternadas, chips |
-| `border` | `#26324B` | `#D9E1EC` | Bordas e divisores |
-| `text` | `#E8EDF6` | `#0F172A` | Texto principal |
-| `text-2` | `#9AA7BD` | `#475569` | Texto secundário, labels |
-| `text-3` | `#64748B` | `#94A3B8` | Muted, timestamps |
-| `primary` | `#3E7BFA` | `#2563EB` | Marca, links, botões, tabs ativas |
-| `primary-hover` | `#5B8FFB` | `#1D4ED8` | Estados hover/active |
-| `primary-subtle` | `#14233F` | `#DBEAFE` | Fundos de destaque suave |
-| `accent` | `#22D3EE` | `#0891B2` | Números-destaque, sparklines, dados "vivos" |
+| `bg` | `#141110` | `#FAF7F2` | Fundo da página (antracite quente / papel) |
+| `surface` | `#1C1917` | `#FFFFFF` | Cards, tabelas |
+| `surface-2` | `#262019` | `#F1ECE3` | Hover, células alternadas, chips |
+| `border` | `#3A322A` | `#E0D8CC` | Bordas e divisores |
+| `text` | `#F0EBE4` | `#1C1917` | Texto principal |
+| `text-2` | `#A89F94` | `#57534E` | Texto secundário, labels |
+| `text-3` | `#6E665C` | `#A8A29E` | Muted, timestamps |
+| `primary` | `#FF6B35` | `#D9480F` | Marca (laranja queimado), links, botões, tabs |
+| `primary-hover` | `#FF8657` | `#B93A0A` | Estados hover/active |
+| `primary-subtle` | `#3B2114` | `#FFE8DC` | Fundos de destaque suave |
+| `on-primary` | `#401803` | `#FFFFFF` | Texto sobre a marca |
 
-**Semânticas** (iguais nos dois temas, ajustando luminância):
+**Semânticas** (com codificação por forma obrigatória):
 
 | Token | Hex (dark) | Uso |
 |---|---|---|
-| `win` / `success` | `#22C55E` | Vitória, confirmações |
-| `loss` / `danger` | `#EF4444` | Derrota, cartão vermelho, erros |
-| `draw` | `#94A3B8` | Empate |
-| `card-yellow` | `#FACC15` | Cartão amarelo (sempre com ícone, nunca só cor) |
-| `live` | `#F43F5E` | Indicador pulsante de jogo ao vivo |
+| `win` / `success` | `#2FBF71` | Vitória, confirmações |
+| `loss` / `danger` | `#E5484D` | Derrota, cartão vermelho, erros |
+| `draw` | `#A89F94` | Empate |
+| `card-yellow` | `#FFD60A` | Cartão amarelo — **só em chip formato cartão** |
+| `live` | `#FF4757` | Indicador pulsante de jogo ao vivo (dot + minuto) |
 
-**Badges de confiança** (doc 10 — TrustBadge):
+**Badges de confiança** (doc 10 — TrustBadge; diferenciados por ícone + label,
+não só por cor):
 
-| Badge | Hex | |
+| Badge | Hex | Forma |
 |---|---|---|
-| ✓ confirmado | `#34D399` | verde |
-| ● ao vivo (provisório) | `#FBBF24` | âmbar |
-| ƒ derivado | `#60A5FA` | azul claro (tooltip com fórmula) |
-| ⚠ parcial | `#FB923C` | laranja |
+| ✓ confirmado | `#34D399` | pill verde |
+| ● provisório (ao vivo) | `#FBBF24` | pill âmbar com dot pulsante |
+| ƒ derivado | `#6CA0F5` | pill azul (tooltip com fórmula e amostra) |
+| ⚠ parcial | `#D97706` | pill outline tracejado com ícone ⚠ |
 
-### Direção B — "Gramado noturno"
+**Tipografia** (parte da identidade C): serif de display para manchetes e
+números-herói (ex.: Fraunces/Playfair — validar licença), sans para UI (ex.:
+Inter/Geist), **mono tabular para colunas de números** (alinhamento de
+tabelas densas). Nunca serif em labels de UI.
 
-Verde-preto profundo (`#0B1210`), superfícies `#121A16`, primária lima
-`#A3E635` ou verde-campo `#4ADE80`, texto gelo. Bonita e "futebol", **mas** a
-marca verde compete diretamente com o verde semântico de vitória/confirmado —
-em tabelas densas de W/D/L isso confunde. Só viável rebaixando o verde
-semântico para outra tonalidade, o que enfraquece a convenção universal.
+## Direções descartadas (referência)
 
-### Direção C — "Imprensa esportiva"
-
-Antracite (`#121212`) + âmbar/laranja editorial (`#F59E0B`), tipografia serif
-nos títulos. Personalidade de jornal esportivo, **mas** âmbar colide com
-cartão amarelo e com o badge "ao vivo provisório" — a pior das três para o
-nosso caso semântico.
-
-## Recomendação e racional
-
-**Direção A.** É a única em que a camada semântica fica 100 % livre de
-ambiguidade — e num produto cujo diferencial nº 1 é confiança na leitura do
-dado, a hierarquia visual serve à semântica, não o contrário. B e C podem
-inspirar temas alternativos no futuro (theming é barato com tokens), mas o
-padrão nasce A.
+- **A — "Radar"**: grafite azulado `#0A0F1C`, marca azul elétrico `#3E7BFA`,
+  accent ciano `#22D3EE`. Semanticamente a mais limpa; candidata natural a
+  tema alternativo.
+- **B — "Gramado noturno"**: verde-preto `#0B1210`, marca lima `#A3E635`.
+  Marca compete com o verde semântico; descartada.
 
 ## Regras de aplicação
 
-1. Cor nunca é o único canal (acessibilidade): cartões têm ícone + texto,
-   vitória/derrota têm letra (V/E/D), live tem label.
-2. Contraste AA mínimo: `text` sobre `surface` e `primary` sobre `bg`
-   verificados nos dois temas antes de entrar no design system.
-3. `accent` (ciano) é reservado para **dados**, não para UI chrome — se tudo é
-   destaque, nada é.
-4. Tokens viram CSS variables + config do Tailwind na SPEC-001; nenhum hex
+1. Cor nunca é o único canal: cartões têm forma+ícone, W/E/D têm letra, live
+   tem label de minuto.
+2. Contraste AA mínimo verificado nos dois temas antes de entrar no design
+   system (atenção especial: `primary` sobre `bg` e `card-yellow` sobre
+   `surface` no light mode).
+3. Tokens viram CSS variables + config do Tailwind na SPEC-001; nenhum hex
    hardcoded em componente.
+4. Máximo um elemento `primary` sólido por vista (botão principal); o resto
+   usa outline/ghost — a paleta quente satura rápido.
 
 ## Pendências
 
-- [ ] Escolha final da direção pelo fundador (recomendação: A)
-- [ ] Logo/tipografia (fora de escopo deste doc; sugestão inicial: sans
-  geométrica para UI — ex.: Inter/Geist — e mono tabular para números)
-- [ ] Verificação de contraste AA automatizada no Storybook/CI (V1)
+- [ ] Logo/wordmark (aguarda decisão do novo nome do produto)
+- [ ] Validar contraste AA do light mode (`card-yellow` é o caso difícil)
+- [ ] Verificação de contraste automatizada no Storybook/CI (V1)
