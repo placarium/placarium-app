@@ -1,0 +1,22 @@
+# Dependências
+node_modules/
+.pnpm-store/
+
+# Builds
+.next/
+dist/
+out/
+.turbo/
+
+# Ambiente e secrets — nunca commitar
+.env
+.env.*
+!.env.example
+
+# Contexto de sessão (ctx-kit) — local, por branch
+.context/
+
+# Logs e temporários
+*.log
+.DS_Store
+coverage/
