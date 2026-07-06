@@ -5,11 +5,12 @@
 Se eu fosse construir isto do zero, sozinho, otimizando velocidade + qualidade
 + confiabilidade + custo controlado + evolução:
 
-1. **Nome**: **Súmula** — curto, brasileiro, e é literalmente o documento
-   oficial e auditável da partida: o produto inteiro numa palavra. Repo
-   `lsstomas/sumula` (privado); org `sumula-app` (livre no GitHub) quando
-   abrir. Validar domínio (`sumula.app`/`sumula.com.br`) e colisões de marca
-   no INPI na Fase 0 — a busca web estava indisponível na criação deste doc.
+1. **Nome**: **StatsHub** (decisão do fundador em 2026-07-06, substituindo a
+   proposta inicial "Súmula") — direto e autoexplicativo: o hub de
+   estatísticas. Org GitHub `stats-hub` (slug; display name "StatsHub"), repo
+   `stats-hub/stats-hub-monorepo`. Atenção: nome genérico em inglês tem risco
+   maior de colisão de marca/domínio — validar `statshub.com.br`/`.app` e
+   INPI na Fase 0 é ainda mais importante.
 2. **Semana 1 em duas frentes**: trial de 2 provedores com jogos reais +
    monorepo com pipeline de fixtures. **Não escrever UI antes de ver a
    qualidade real dos dados** — é o maior risco do projeto (R2) e o mais
@@ -89,14 +90,14 @@ resumo das entrevistas, e o golden set inicial de perguntas.
 
 ## Dia 3 — Nome, repositório e fundação
 - **Objetivo**: fundação oficial do projeto.
-- **Tarefas**: verificar domínio sumula.app/.com.br + busca INPI (se
-  conflito: decidir entre alternativas — ver nota abaixo); registrar domínio;
-  monorepo SPEC-001 completo (workspaces, TS, lint, vitest, compose, CI);
-  primeiro deploy "hello" na Vercel + Railway (esteira pronta cedo).
+- **Tarefas**: verificar domínio statshub.com.br/.app + busca INPI (nome
+  decidido: StatsHub); registrar domínio; monorepo SPEC-001 completo
+  (workspaces, TS, lint, vitest, compose, CI); primeiro deploy "hello" na
+  Vercel + Railway (esteira pronta cedo).
 - **Entregável**: CI verde + deploy dummy nos 2 alvos.
-- **Decisão**: nome final (gatilho para org/branding depois).
-- **Risco**: bikeshedding de nome — timebox de 1 h; alternativas prontas:
-  *Prancheta*, *Apito*, *Rodada*.
+- **Decisão**: domínio final (o nome já está cravado).
+- **Risco**: nome genérico com colisão de marca — se o INPI/domínio travar,
+  variações: *StatsHub BR*, *TheStatsHub*, *StatsHub.futebol*.
 
 ## Dia 4 — Schema core + migrations
 - **Objetivo**: SPEC-003.

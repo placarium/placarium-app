@@ -1,16 +1,15 @@
-# Súmula
+# StatsHub
 
 > Tudo que acontece em campo — com fonte, timestamp e nível de confiança.
 
-**Súmula** é uma plataforma web de dados, analytics e IA para futebol: jogos ao
-vivo, histórico auditável, estatísticas cruzadas por múltiplas dimensões
+**StatsHub** é uma plataforma web de dados, analytics e IA para futebol: jogos
+ao vivo, histórico auditável, estatísticas cruzadas por múltiplas dimensões
 (time, jogador, árbitro, estádio, campeonato, confronto) e uma camada de IA
 conversacional que **nunca inventa estatística** — toda resposta vem de
 ferramentas que consultam dados rastreáveis.
 
-O nome vem da **súmula** — o documento oficial em que o árbitro registra tudo
-que aconteceu na partida. É exatamente a proposta do produto: ser o registro
-confiável, auditável e pesquisável do futebol.
+O nome diz o que o produto é: o **hub de estatísticas** — o lugar único onde
+dado de futebol confiável, auditável e cruzável mora.
 
 ## Estado do projeto
 
@@ -38,6 +37,7 @@ desenvolvimento. Comece por [docs/16-recomendacoes-e-proximas-acoes.md](docs/16-
 | [14](docs/14-seguranca-legal-compliance.md) | LGPD, licenciamento de dados, riscos legais |
 | [15](docs/15-riscos-e-tradeoffs.md) | Matriz de riscos e trade-offs |
 | [16](docs/16-recomendacoes-e-proximas-acoes.md) | Recomendação objetiva e plano dos próximos 7 dias |
+| [17](docs/17-identidade-visual.md) | Identidade visual: paleta de cores e tokens |
 
 ## Decisões de fundação (resumo)
 

@@ -2,7 +2,7 @@
 
 ## O que é
 
-**Súmula** é uma plataforma web que reúne, organiza e torna pesquisável
+**StatsHub** é uma plataforma web que reúne, organiza e torna pesquisável
 praticamente tudo que envolve uma partida de futebol: jogos ao vivo, histórico,
 estatísticas por time/jogador/árbitro/estádio/campeonato, timeline minuto a
 minuto — tudo com **origem, timestamp e nível de confiança explícitos** — mais
@@ -22,7 +22,7 @@ por jogo em clássicos?"* precisa:
 Sites de placar mostram **o que está acontecendo**; quase nenhum permite
 **cruzar dimensões** (árbitro × estádio × confronto × período do jogo) nem
 garante rastreabilidade. E os que permitem (Opta/StatsPerform, Wyscout) são
-B2B, caros e fechados. O Súmula ocupa o meio: profundidade analítica de
+B2B, caros e fechados. O StatsHub ocupa o meio: profundidade analítica de
 ferramenta profissional com UX de produto de consumo, com prioridade para
 **Brasil e América do Sul** — justamente onde a cobertura dos players globais é
 mais rasa.

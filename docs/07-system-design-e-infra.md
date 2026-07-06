@@ -78,7 +78,7 @@ precisa de um dono e de um motivo escrito.
 ## 8.4 Setup local
 
 ```bash
-git clone git@github.com:lsstomas/sumula.git && cd sumula
+git clone git@github.com:stats-hub/stats-hub-monorepo.git && cd stats-hub-monorepo
 pnpm install
 cp .env.example .env          # preencher 3–4 chaves mínimas
 pnpm dev:services             # docker compose up -d (postgres + redis)

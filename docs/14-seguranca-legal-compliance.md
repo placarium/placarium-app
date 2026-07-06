@@ -69,7 +69,7 @@
 ## Resumo de pendências jurídicas (para a Fase 0/1)
 
 1. ⚖️ Revisão dos termos do provedor escolhido (antes de assinar).
-2. ⚖️ Política de privacidade + termos de uso do Súmula.
+2. ⚖️ Política de privacidade + termos de uso do StatsHub.
 3. ⚖️ Enquadramento LGPD dos logs de IA e do DPA do provedor de LLM.
 4. ⚖️ Uso de nomes/escudos de clubes na UI.
 5. ⚖️ (Só se/quando) odds e programas de afiliados.

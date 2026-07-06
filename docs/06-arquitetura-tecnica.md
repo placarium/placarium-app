@@ -7,7 +7,7 @@ descartados até haver dor real (equipes múltiplas ou perfis de carga
 irreconciliáveis).
 
 ```
-sumula/  (pnpm workspaces)
+stats-hub-monorepo/  (pnpm workspaces)
 ├── apps/
 │   ├── web/        # Next.js 15+ (App Router) — UI + API de leitura + rotas de IA
 │   └── ingest/     # Worker Node persistente — BullMQ: polling, consolidação, agregados
