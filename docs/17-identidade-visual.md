@@ -8,6 +8,12 @@ cores semânticas (abaixo). As direções A ("Radar", azul) e B ("Gramado
 noturno", verde) foram consideradas e descartadas; ficam como referência para
 temas alternativos futuros.
 
+> **Fonte de verdade da identidade**: [`DESIGN.md`](../DESIGN.md) +
+> `assets/brand/` (criados pelo fundador em 2026-07-06 — logo "Colunas":
+> gráfico de barras minimalista formando um P subliminar, com variantes
+> dark/light em SVG e PNG). Este doc preserva o racional das direções
+> avaliadas; em caso de divergência de token, vale o DESIGN.md.
+
 ## Restrição de projeto (vem antes do gosto)
 
 Num produto de estatística de futebol, **as cores semânticas são sagradas**:
@@ -88,6 +94,6 @@ tabelas densas). Nunca serif em labels de UI.
 
 ## Pendências
 
-- [ ] Logo/wordmark do Placarium (direções em avaliação pelo fundador)
+- [x] Logo/wordmark do Placarium — entregue em `assets/brand/` (2026-07-06)
 - [ ] Validar contraste AA do light mode (`card-yellow` é o caso difícil)
 - [ ] Verificação de contraste automatizada no Storybook/CI (V1)

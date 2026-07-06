@@ -1,0 +1,37 @@
+:root {
+  --placarium-bg: #faf7f2;
+  --placarium-surface: #ffffff;
+  --placarium-surface-2: #f1ece3;
+  --placarium-border: #e0d8cc;
+  --placarium-text: #1c1917;
+  --placarium-text-2: #57534e;
+  --placarium-text-3: #a8a29e;
+  --placarium-primary: #d9480f;
+  --placarium-primary-hover: #b93a0a;
+  --placarium-primary-subtle: #ffe8dc;
+  --placarium-on-primary: #ffffff;
+  --placarium-win: #2fbf71;
+  --placarium-success: #2fbf71;
+  --placarium-loss: #e5484d;
+  --placarium-danger: #e5484d;
+  --placarium-draw: #a89f94;
+  --placarium-card-yellow: #ffd60a;
+  --placarium-live: #ff4757;
+  --placarium-derived: #6ca0f5;
+  --placarium-partial: #d97706;
+}
+
+[data-theme="dark"] {
+  --placarium-bg: #141110;
+  --placarium-surface: #1c1917;
+  --placarium-surface-2: #262019;
+  --placarium-border: #3a322a;
+  --placarium-text: #f0ebe4;
+  --placarium-text-2: #a89f94;
+  --placarium-text-3: #6e665c;
+  --placarium-primary: #ff6b35;
+  --placarium-primary-hover: #ff8657;
+  --placarium-primary-subtle: #3b2114;
+  --placarium-on-primary: #401803;
+}
+

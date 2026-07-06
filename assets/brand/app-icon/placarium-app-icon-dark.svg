@@ -1,0 +1,11 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Placarium app icon dark</title>
+  <desc id="desc">Icone de app do Placarium em dark mode.</desc>
+  <rect width="1024" height="1024" rx="224" fill="#141110"/>
+  <g transform="translate(269 272)">
+    <rect x="0" y="0" width="112" height="480" rx="56" fill="#F0EBE4"/>
+    <rect x="186" y="0" width="112" height="480" rx="56" fill="#FF6B35"/>
+    <rect x="372" y="0" width="112" height="286" rx="56" fill="#FF6B35"/>
+  </g>
+</svg>
+

@@ -1,0 +1,11 @@
+<svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Placarium simbolo dark</title>
+  <desc id="desc">Simbolo do Placarium em dark mode: barras minimalistas com P subliminar.</desc>
+  <rect width="160" height="160" rx="24" fill="#141110"/>
+  <g transform="translate(41 43)">
+    <rect x="0" y="0" width="18" height="74" rx="9" fill="#F0EBE4"/>
+    <rect x="30" y="0" width="18" height="74" rx="9" fill="#FF6B35"/>
+    <rect x="60" y="0" width="18" height="44" rx="9" fill="#FF6B35"/>
+  </g>
+</svg>
+

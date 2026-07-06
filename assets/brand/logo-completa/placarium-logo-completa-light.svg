@@ -1,0 +1,12 @@
+<svg width="520" height="160" viewBox="0 0 520 160" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Placarium logo completa light</title>
+  <desc id="desc">Logo Placarium com simbolo minimalista de barras formando um P subliminar e wordmark.</desc>
+  <rect width="520" height="160" rx="24" fill="#FAF7F2"/>
+  <g transform="translate(64 43)">
+    <rect x="0" y="0" width="18" height="74" rx="9" fill="#1C1917"/>
+    <rect x="30" y="0" width="18" height="74" rx="9" fill="#D9480F"/>
+    <rect x="60" y="0" width="18" height="44" rx="9" fill="#D9480F"/>
+  </g>
+  <text x="164" y="93" fill="#1C1917" font-family="Inter, Geist, Arial, sans-serif" font-size="48" font-weight="500" letter-spacing="0">placarium</text>
+</svg>
+

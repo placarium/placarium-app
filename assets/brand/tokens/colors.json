@@ -1,0 +1,42 @@
+{
+  "placarium": {
+    "dark": {
+      "bg": "#141110",
+      "surface": "#1C1917",
+      "surface2": "#262019",
+      "border": "#3A322A",
+      "text": "#F0EBE4",
+      "text2": "#A89F94",
+      "text3": "#6E665C",
+      "primary": "#FF6B35",
+      "primaryHover": "#FF8657",
+      "primarySubtle": "#3B2114",
+      "onPrimary": "#401803"
+    },
+    "light": {
+      "bg": "#FAF7F2",
+      "surface": "#FFFFFF",
+      "surface2": "#F1ECE3",
+      "border": "#E0D8CC",
+      "text": "#1C1917",
+      "text2": "#57534E",
+      "text3": "#A8A29E",
+      "primary": "#D9480F",
+      "primaryHover": "#B93A0A",
+      "primarySubtle": "#FFE8DC",
+      "onPrimary": "#FFFFFF"
+    },
+    "semantic": {
+      "win": "#2FBF71",
+      "success": "#2FBF71",
+      "loss": "#E5484D",
+      "danger": "#E5484D",
+      "draw": "#A89F94",
+      "cardYellow": "#FFD60A",
+      "live": "#FF4757",
+      "derived": "#6CA0F5",
+      "partial": "#D97706"
+    }
+  }
+}
+
