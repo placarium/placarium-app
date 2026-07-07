@@ -22,6 +22,21 @@ dado renderizado mostra origem/confiança (TrustBadge).
 - **Nunca** chama o provedor esportivo — isso é papel exclusivo do ingest.
 - Nunca importa de `apps/ingest`.
 
+## Organização interna (colocation por rota)
+
+```
+apps/web/
+├── app/                    # rotas do App Router — cada rota é DONA do que só ela usa
+│   └── partidas/[slug]/    #   page.tsx + componentes locais + actions.ts da rota
+├── components/             # compartilhado de domínio (MatchCard, TrustBadge) — sobe no 2º uso
+│   └── ui/                 # primitivos do design system (Button, Badge...)
+└── lib/                    # infra do app: env.ts (Zod), redis, helpers de cache
+```
+
+Regras: o que é de uma rota mora NA rota (deletar a rota deleta tudo dela);
+componente só "sobe" para `components/` no segundo uso; **não existe
+`utils/`** — helper sem dono é código órfão.
+
 ## Convenções
 
 - **RSC por padrão**; `"use client"` só com interatividade real (estado,

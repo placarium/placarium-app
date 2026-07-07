@@ -24,7 +24,8 @@
     "db:seed": "pnpm --filter @placarium/db db:seed",
     "db:studio": "pnpm --filter @placarium/db db:studio",
     "prepare": "lefthook install",
-    "lint:fix": "biome check --write ."
+    "lint:fix": "biome check --write .",
+    "setup:env": "node scripts/setup-env.mjs"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.2",

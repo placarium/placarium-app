@@ -11,6 +11,21 @@ Confiabilidade > latência: perder evento em silêncio é o pior bug possível.
 - Nunca importa de `apps/web`; nunca serve request de usuário
   (exceção futura: health check e SSE na V1).
 
+## Organização interna
+
+```
+apps/ingest/src/
+├── index.ts     # bootstrap: env, conexões, registro de workers, graceful shutdown
+├── queues.ts    # filas (live, batch) + limiters de rate do provedor
+├── jobs/        # um arquivo por job — a CASCA agendável (recebe id, trata erro, loga)
+├── pipeline/    # os PASSOS testáveis reutilizados (persistSnapshot, upsertEvents, publishLive)
+├── provider/    # client HTTP do provedor + rate limiter + mock (serve fixtures do core)
+└── lib/         # env.ts (Zod), logger pino, client redis
+```
+
+A distinção que evita job de 300 linhas: `jobs/` orquestra, `pipeline/`
+executa — poll_live e consolidate compartilham os mesmos passos do pipeline.
+
 ## Convenções
 
 - Jobs nomeados e pequenos: `discover_fixtures`, `live_window_scheduler`,

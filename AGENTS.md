@@ -51,11 +51,26 @@ placarium-app/
 │   ├── db/           # Drizzle: schema, migrations, client, queries compartilhadas
 │   └── ai/           # Tools da IA, camada semântica, prompts, golden set/evals
 ├── e2e/              # Playwright: jornadas de usuário (agente e2e-tester)
+├── scripts/          # Ferramental operacional — NÃO é código de produto (ver scripts/README.md)
+├── design/           # Arquivos .pen (Pencil): UIs versionadas junto do código
 ├── docs/             # Fundação: decisões, specs 001–020, riscos (ver docs/README.md)
 ├── assets/brand/     # Logo, tokens de cor (fonte de verdade: DESIGN.md)
 ├── .agents/          # Agentes canônicos (symlink: .claude/agents)
 └── .context/         # Estado de sessão por branch (ctx-kit, gitignored)
 ```
+
+## Direção de dependências (REGRA)
+
+```
+core ← db ← ai        core não depende de NADA; db pode importar tipos do core;
+  ↖    ↖    ↖         ai usa db+core; web e ingest usam os packages mas
+  ingest   web        NUNCA importam um ao outro.
+```
+
+- Enforcement por convenção (CodeRabbit instruído) — ferramenta só se violado.
+- Package novo apenas com **2 consumidores reais** (nada preventivo).
+- Proibido diretório `utils/` genérico: helper vive junto de quem usa e só
+  "sobe" no segundo uso. O client HTTP do provedor vive DENTRO do ingest.
 
 ## Arquitetura em uma tela
 
@@ -118,6 +133,12 @@ sem odds, sem scraping, sem previsões. Racional completo em `docs/`.
 - Gestão do projeto: **Plane** (externo). Não usar Linear.
 - Agentes (`.agents/`): `pr-manager` (preparar/revisar PRs) ·
   `db-migrations` (todo schema) · `e2e-tester` (E2E + agent-browser).
+- **Envs**: um único `.env` na raiz (symlinks criados por `pnpm setup:env`);
+  cada app valida com `env.ts` (Zod) no boot. Preview/prod vivem SÓ nos
+  painéis Vercel/Railway — arquivos `.env.dev`/`.env.prod` são proibidos.
+- **Design & PM**: UIs nascem no **Pencil** (arquivos `.pen` em `design/`,
+  versionados) e são anexadas aos work items do **Plane**. Ambos conectados
+  por MCP — setup no README §Ferramentas do time.
 - Commits em português explicando o porquê; nunca commitar `.env`.
 - Chave real de provedor só em produção; dev/CI usam `FOOTBALL_PROVIDER=mock`.
 
