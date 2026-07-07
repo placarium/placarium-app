@@ -1,7 +1,11 @@
-# Placarium
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/brand/wordmark/placarium-wordmark-dark.svg">
+    <img src="assets/brand/wordmark/placarium-wordmark-light.svg" alt="Placarium" width="360">
+  </picture>
+</p>
 
-> O observatório do futebol — tudo que acontece em campo, com fonte,
-> timestamp e nível de confiança.
+<p align="center"><em>O observatório do futebol — tudo que acontece em campo, com fonte, timestamp e nível de confiança.</em></p>
 
 **Placarium** é uma plataforma web de dados, analytics e IA para futebol:
 jogos ao vivo, histórico auditável, estatísticas cruzadas por múltiplas
@@ -9,52 +13,104 @@ dimensões (time, jogador, árbitro, estádio, campeonato, confronto) e uma
 camada de IA conversacional que **nunca inventa estatística** — toda resposta
 vem de ferramentas que consultam dados rastreáveis.
 
-O nome funde _placar_ + _-arium_ (planetário, aquário): o lugar onde o
-futebol é **observado e estudado** — não mais um site de placar, e sim o
-observatório onde o dado confiável, auditável e cruzável mora.
+- 📚 **Decisões e specs**: [docs/](docs/README.md) · 🎨 **Marca/UI**: [DESIGN.md](DESIGN.md)
+- 🤖 **Regras para humanos e IAs**: [AGENTS.md](AGENTS.md) (canônico; `CLAUDE.md` é symlink)
 
-## Estado do projeto
+## Estrutura de pastas
 
-**Fase 0 — pesquisa, validação e definição de escopo.** Nenhuma linha de código
-de produto ainda; este repositório contém a documentação de fundação que guia o
-desenvolvimento. Comece por [docs/16-recomendacoes-e-proximas-acoes.md](docs/16-recomendacoes-e-proximas-acoes.md).
+```
+placarium-app/
+├── apps/
+│   ├── web/          # Next.js (App Router): UI + leituras (RSC) + mutações (Server Actions)
+│   └── ingest/       # Worker Node/BullMQ: único processo que fala com o provedor de dados
+├── packages/
+│   ├── core/         # Domínio puro (tipos, Zod, normalizadores, fixtures) — zero I/O
+│   ├── db/           # Drizzle: schema, migrations, client, queries compartilhadas
+│   └── ai/           # Tools da IA, camada semântica, prompts, evals (golden set)
+├── e2e/              # Playwright: jornadas de usuário
+├── docs/             # Fundação: decisões, specs 001–020, riscos → docs/README.md
+├── assets/brand/     # Logo e tokens de cor (fonte de verdade: DESIGN.md)
+└── .agents/          # Agentes de IA canônicos (symlink: .claude/agents)
+```
 
-## Documentação
+Cada módulo tem um `AGENTS.md` próprio com convenções e exemplos — leia antes
+de mexer nele.
 
-| Doc                                             | Conteúdo                                                     |
-| ----------------------------------------------- | ------------------------------------------------------------ |
-| [01](docs/01-visao-geral-e-mvp.md)              | Visão geral do produto, personas, diferencial, escopo do MVP |
-| [02](docs/02-requisitos-funcionais.md)          | Requisitos funcionais por módulo                             |
-| [03](docs/03-requisitos-nao-funcionais.md)      | Requisitos não funcionais com metas por estágio              |
-| [04](docs/04-estrategia-de-dados.md)            | Estratégia de dados e avaliação de provedores                |
-| [05](docs/05-modelo-de-dados.md)                | Modelo de domínio, entidades, pseudo-schema                  |
-| [06](docs/06-arquitetura-tecnica.md)            | Arquitetura técnica e stack                                  |
-| [07](docs/07-system-design-e-infra.md)          | System design, ambientes, hospedagem, deploy, resiliência    |
-| [08](docs/08-realtime-e-ingestao.md)            | Real-time e ingestão de eventos                              |
-| [09](docs/09-ia-e-confiabilidade.md)            | Camada de IA, tools, anti-alucinação, evals                  |
-| [10](docs/10-ux-e-interface.md)                 | UX, telas do MVP, mobile/desktop                             |
-| [11](docs/11-modelo-de-negocio.md)              | Hipóteses de monetização e validação                         |
-| [12](docs/12-roadmap.md)                        | Roadmap por fases (0 a 6)                                    |
-| [13](docs/13-specs.md)                          | SPEC-001 a SPEC-020                                          |
-| [14](docs/14-seguranca-legal-compliance.md)     | LGPD, licenciamento de dados, riscos legais                  |
-| [15](docs/15-riscos-e-tradeoffs.md)             | Matriz de riscos e trade-offs                                |
-| [16](docs/16-recomendacoes-e-proximas-acoes.md) | Recomendação objetiva e plano dos próximos 7 dias            |
-| [17](docs/17-identidade-visual.md)              | Identidade visual: paleta de cores e tokens                  |
-| [18](docs/18-provedores-pricing-e-orcamento.md) | Provedores: pricing, demanda estimada e orçamento do MVP     |
+## Arquitetura
 
-## Decisões de fundação (resumo)
+```
+usuário ⇄ web (Vercel): RSC lê Postgres · actions mutam · /api/live lê Redis
+                                  ▲                                ▲
+                       Postgres (Supabase SP, puro)          Redis (Railway)
+                                  ▲                                ▲
+        ingest (Railway, Docker): poll provedor → raw_snapshot → normaliza (core)
+             → upsert com dedup → recalcula agregados (MVs) → snapshot no cache
+IA: /api/chat → tools fechadas (packages/ai) → resposta com fontes e confiança
+```
 
-- **Monorepo** pnpm: `apps/web` (Next.js), `apps/ingest` (worker Node/BullMQ),
-  `packages/db` (Drizzle), `packages/core` (domínio), `packages/ai` (tools).
-- **Infra MVP**: Vercel (web) + Railway (worker + Redis) + Supabase
-  (Postgres puro, região São Paulo — sem supabase-js, sem RLS, sem Supabase Auth).
-- **Cobertura MVP**: Brasileirão Série A + Copa do Brasil + Libertadores,
-  1 provedor de dados, 3 temporadas de histórico.
-- **Real-time MVP**: polling adaptativo (10–20 s) sobre cache Redis; SSE na V1.
-- **IA**: Vercel AI SDK com provider plugável (recomendação: Claude), tools
-  tipadas com Zod sobre camada semântica de queries pré-aprovadas. Sem NL→SQL
-  livre. Modelo de produção escolhido por evals na Fase 3, não por fé.
-- **Confiabilidade em primeiro lugar**: todo dado tem origem, timestamp e nível
-  de confiança; payloads brutos são arquivados para reprocessamento.
+Monolito modular com **2 deployables**: o site (serverless, Vercel) e o worker
+de ingestão (container, Railway). Usuários leem sempre do nosso banco/cache —
+nunca do provedor externo — então o custo de API é função do calendário de
+jogos, não do tráfego. Detalhes: [docs/06](docs/06-arquitetura-tecnica.md) e
+[docs/07](docs/07-system-design-e-infra.md).
 
-Detalhes e trade-offs de cada decisão estão nos docs correspondentes.
+**Stack**: pnpm workspaces · Next.js/React · Node + BullMQ · PostgreSQL
+(Supabase como Postgres puro) · Redis · Drizzle · Better Auth · AI SDK ·
+Biome · vitest · Playwright.
+
+## Setup local
+
+Pré-requisitos: **Node ≥ 22**, **pnpm ≥ 10** (`corepack enable`), **Docker**
+(no Windows/WSL: Docker Desktop com WSL Integration habilitada).
+
+```bash
+git clone git@github.com:placarium/placarium-app.git && cd placarium-app
+pnpm install            # dependências + hooks (lefthook)
+cp .env.example .env    # preencha conforme necessário
+pnpm dev:services       # Postgres + Redis locais (docker compose)
+pnpm db:migrate         # migrations (disponível a partir da SPEC-003)
+pnpm db:seed            # seed de referência (idem)
+pnpm dev                # web (localhost:3000) + worker em watch
+```
+
+### Scripts
+
+| Comando                          | Faz                                           |
+| -------------------------------- | --------------------------------------------- |
+| `pnpm dev` / `dev:web` / `dev:ingest` | apps em watch (juntos ou individualmente) |
+| `pnpm dev:services` / `dev:services:down` | sobe/derruba Postgres + Redis locais  |
+| `pnpm test`                      | testes unit/integração (vitest, rápido)       |
+| `pnpm test:e2e`                  | Playwright (antes, 1×: `pnpm test:e2e:install`) |
+| `pnpm lint` / `pnpm lint:fix`    | Biome check (sem/com autofix)                 |
+| `pnpm format` / `format:check`   | Biome format                                  |
+| `pnpm typecheck`                 | tsc em todos os pacotes                       |
+| `pnpm db:*`                      | generate · migrate · seed · studio            |
+
+### Variáveis de ambiente
+
+Documentadas em [.env.example](.env.example). Regras: `FOOTBALL_PROVIDER=mock`
+em dev/CI (chave real de provedor **só em produção**); nunca commitar `.env`.
+
+## Qualidade e fluxo de contribuição
+
+- **Main só via PR** com CI verde (Biome → typecheck → vitest → build).
+  Review humano opcional; **CodeRabbit** revisa toda PR e os comentários são
+  sempre tratados. Branch: `tipo/spec-XXX-slug`; squash merge; commits em pt.
+- **Testes sempre**: feature sem teste não entra.
+- Hooks locais (lefthook): Biome no pre-commit; typecheck+test no pre-push.
+- Agentes de IA do projeto (`.agents/`): `pr-manager` (ciclo de PR),
+  `db-migrations` (qualquer schema), `e2e-tester` (E2E + agent-browser).
+
+## Deploy e serviços
+
+| Peça | Onde | Como |
+| --- | --- | --- |
+| `apps/web` | Vercel | Preview automático por PR; produção no merge da main |
+| `apps/ingest` | Railway | Docker ([apps/ingest/Dockerfile](apps/ingest/Dockerfile), contexto = raiz) |
+| Postgres | Supabase (região São Paulo) | Projetos separados dev e prod; migrations só via Drizzle |
+| Redis | Railway | Mesmo projeto do worker |
+| Observabilidade | Sentry (erros) · pino→Axiom (logs) · Better Stack (uptime) | DSNs via env |
+
+Setup de contas pendente (checklist): Vercel + Railway + Supabase (dev/prod) +
+Sentry + Axiom + Better Stack + instalação do app do CodeRabbit na org.
+Ambientes e estratégia completa: [docs/07](docs/07-system-design-e-infra.md).

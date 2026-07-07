@@ -1,8 +1,8 @@
 pre-commit:
   commands:
-    format:
-      glob: "*.{ts,tsx,js,mjs,json,md,yml,yaml,css}"
-      run: pnpm prettier --check {staged_files}
+    biome:
+      glob: "*.{ts,tsx,js,mjs,json,css}"
+      run: pnpm exec biome check --no-errors-on-unmatched {staged_files}
 pre-push:
   commands:
     typecheck:

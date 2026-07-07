@@ -1,0 +1,20 @@
+language: pt-BR
+reviews:
+  profile: assertive
+  high_level_summary: true
+  auto_review:
+    enabled: true
+    drafts: false
+  path_instructions:
+    - path: "packages/core/**"
+      instructions: "Domínio puro: rejeite qualquer I/O (fetch, banco, process.env). Funções puras e determinísticas; normalizadores precisam de teste com fixture real."
+    - path: "packages/db/**"
+      instructions: "Migrations expand-and-contract; nunca editar migration aplicada; tabela de fato exige source_provider_id, source_fetched_at e confidence NOT NULL; nada de RLS/supabase-js."
+    - path: "packages/ai/**"
+      instructions: "Tools com schema Zod estrito e SQL parametrizado fixo; proibido SQL/tabela/métrica como string livre; resposta sempre com meta de proveniência."
+    - path: "apps/web/**"
+      instructions: "RSC por padrão; leitura nunca via useEffect+fetch; Server Action só para mutação com Zod; zero hex hardcoado (usar tokens da brand); data-testid em elementos interativos."
+    - path: "apps/ingest/**"
+      instructions: "Jobs idempotentes (dedup_key); raw_snapshot antes de normalizar; retry/backoff via BullMQ; proibido catch silencioso e estado em memória entre jobs."
+chat:
+  auto_reply: true

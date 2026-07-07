@@ -15,18 +15,19 @@
     "test": "pnpm -r --filter !@placarium/e2e test",
     "test:e2e": "pnpm --filter @placarium/e2e test",
     "test:e2e:install": "pnpm --filter @placarium/e2e exec playwright install --with-deps chromium",
-    "lint": "pnpm -r lint",
+    "lint": "biome check .",
     "typecheck": "pnpm -r typecheck",
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
+    "format": "biome format --write .",
+    "format:check": "biome format .",
     "db:generate": "pnpm --filter @placarium/db db:generate",
     "db:migrate": "pnpm --filter @placarium/db db:migrate",
     "db:seed": "pnpm --filter @placarium/db db:seed",
     "db:studio": "pnpm --filter @placarium/db db:studio",
-    "prepare": "lefthook install"
+    "prepare": "lefthook install",
+    "lint:fix": "biome check --write ."
   },
   "devDependencies": {
-    "lefthook": "^1.11.0",
-    "prettier": "^3.5.0"
+    "@biomejs/biome": "^2.5.2",
+    "lefthook": "^1.11.0"
   }
 }
