@@ -5,29 +5,29 @@ versão pública (~10 k usuários); **Escala** = crescimento (~100 k+).
 
 ## Performance e latência
 
-| Métrica | MVP | V1 | Escala |
-|---|---|---|---|
-| LCP (páginas principais, p75, mobile) | < 2,5 s | < 2,0 s | < 1,8 s |
-| API de leitura cacheada (p95) | < 300 ms | < 200 ms | < 150 ms |
-| API de leitura não cacheada (p95) | < 800 ms | < 500 ms | < 400 ms |
-| Atraso do placar vs. provedor | ≤ 60 s | ≤ 30 s | ≤ 15 s |
-| Atualização da timeline ao vivo | ≤ 60 s | ≤ 30 s | ≤ 20 s |
-| Primeira resposta da IA (streaming, p95) | < 4 s até 1º token | < 3 s | < 3 s |
-| Resposta completa da IA (p95) | < 20 s | < 15 s | < 12 s |
+| Métrica                                  | MVP                | V1       | Escala   |
+| ---------------------------------------- | ------------------ | -------- | -------- |
+| LCP (páginas principais, p75, mobile)    | < 2,5 s            | < 2,0 s  | < 1,8 s  |
+| API de leitura cacheada (p95)            | < 300 ms           | < 200 ms | < 150 ms |
+| API de leitura não cacheada (p95)        | < 800 ms           | < 500 ms | < 400 ms |
+| Atraso do placar vs. provedor            | ≤ 60 s             | ≤ 30 s   | ≤ 15 s   |
+| Atualização da timeline ao vivo          | ≤ 60 s             | ≤ 30 s   | ≤ 20 s   |
+| Primeira resposta da IA (streaming, p95) | < 4 s até 1º token | < 3 s    | < 3 s    |
+| Resposta completa da IA (p95)            | < 20 s             | < 15 s   | < 12 s   |
 
-*Nota*: o atraso total = atraso do provedor + nosso pipeline. Só controlamos o
+_Nota_: o atraso total = atraso do provedor + nosso pipeline. Só controlamos o
 nosso; medi-lo separado (`provider_lag` vs `pipeline_lag`) desde o MVP.
 
 ## Disponibilidade e confiabilidade
 
-| Métrica | MVP | V1 | Escala |
-|---|---|---|---|
-| Disponibilidade web | 99 % (best effort) | 99,5 % | 99,9 % |
-| Taxa de erro 5xx | < 1 % | < 0,5 % | < 0,1 % |
-| Perda de eventos de partida | 0 tolerada (reconciliação corrige) | idem | idem |
-| RTO (recuperação de falha) | < 4 h | < 1 h | < 15 min |
-| RPO (perda de dados) | ≤ 24 h (backup diário) + raw payloads rejogáveis | ≤ 1 h (PITR) | ≤ 5 min |
-| Jobs de ingestão atrasados | alerta se > 5 min | > 2 min | > 1 min |
+| Métrica                     | MVP                                              | V1           | Escala   |
+| --------------------------- | ------------------------------------------------ | ------------ | -------- |
+| Disponibilidade web         | 99 % (best effort)                               | 99,5 %       | 99,9 %   |
+| Taxa de erro 5xx            | < 1 %                                            | < 0,5 %      | < 0,1 %  |
+| Perda de eventos de partida | 0 tolerada (reconciliação corrige)               | idem         | idem     |
+| RTO (recuperação de falha)  | < 4 h                                            | < 1 h        | < 15 min |
+| RPO (perda de dados)        | ≤ 24 h (backup diário) + raw payloads rejogáveis | ≤ 1 h (PITR) | ≤ 5 min  |
+| Jobs de ingestão atrasados  | alerta se > 5 min                                | > 2 min      | > 1 min  |
 
 ## Consistência de dados
 
@@ -50,15 +50,15 @@ nosso; medi-lo separado (`provider_lag` vs `pipeline_lag`) desde o MVP.
 
 ## Custos (tetos operacionais, a calibrar com preços reais)
 
-| Item | MVP | Regra |
-|---|---|---|
-| Provedor de dados | teto mensal definido na Fase 0 | alertar a 80 % do rate limit |
-| Infra (Vercel+Railway+Neon) | teto mensal baixo, revisado por mês | alerta de billing em cada plataforma |
-| IA | custo por pergunta monitorado; hard cap mensal | free: 10 perguntas/dia; corte automático no cap |
-| Custo total por usuário ativo | métrica acompanhada desde o MVP | define preço do plano pago |
+| Item                          | MVP                                            | Regra                                           |
+| ----------------------------- | ---------------------------------------------- | ----------------------------------------------- |
+| Provedor de dados             | teto mensal definido na Fase 0                 | alertar a 80 % do rate limit                    |
+| Infra (Vercel+Railway+Neon)   | teto mensal baixo, revisado por mês            | alerta de billing em cada plataforma            |
+| IA                            | custo por pergunta monitorado; hard cap mensal | free: 10 perguntas/dia; corte automático no cap |
+| Custo total por usuário ativo | métrica acompanhada desde o MVP                | define preço do plano pago                      |
 
-*Não estimo valores absolutos aqui — preços de provedores e de tokens mudam;
-a Fase 0 preenche esta tabela com números reais.*
+_Não estimo valores absolutos aqui — preços de provedores e de tokens mudam;
+a Fase 0 preenche esta tabela com números reais._
 
 ## Observabilidade (detalhes no doc 07 §8.8)
 

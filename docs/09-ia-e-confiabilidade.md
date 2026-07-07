@@ -40,11 +40,11 @@ validados:
 // packages/ai/tools/getRefereeCardAverage.ts
 inputSchema = z.object({
   refereeSlug: z.string(),
-  seasonLabel: z.string().optional(),      // default: temporada atual
+  seasonLabel: z.string().optional(), // default: temporada atual
   competitionSlug: z.string().optional(),
   onlyDerbies: z.boolean().default(false),
   minMatches: z.number().int().min(1).default(5),
-})
+});
 // SQL fixo sobre analytics.referee_profile + filtro; retorna dados + meta:
 // { rows, meta: { source, computed_at, sample_size, confidence, query_id } }
 ```
@@ -55,22 +55,22 @@ apenas números presentes em `rows`; inclua `meta` na resposta; se
 
 ## Catálogo de tools (MVP)
 
-| Tool | Responde perguntas como |
-|---|---|
-| `getLiveMatches()` | "quais jogos estão rolando?" |
-| `getMatchDetail(matchId)` | "como está o jogo do Flamengo?" |
-| `getTeamRecentStats(team, window, scope, metric)` | "média de escanteios do Flamengo nos últimos 10 jogos" |
-| `getTeamSeasonStats(team, season, scope)` | "quantos gols o Palmeiras sofreu fora de casa?" |
-| `getRefereeProfile(referee, season?)` | "quantos cartões esse árbitro dá por jogo?" |
-| `getStadiumStats(stadium, season?)` | "qual a média de gols no Maracanã?" |
-| `getHeadToHead(teamA, teamB)` | "histórico de Grenal" |
-| `searchMatches(filtros)` | "jogos do Corinthians com +10 escanteios em 2024" |
-| `getCompetitionStats(competition, season)` | "qual campeonato tem mais cartões?" |
-| `getPlayerDisciplinaryHistory(player)` | "cartões do Felipe Melo contra o Palmeiras" (V1 se granularidade permitir) |
-| `getStandings(competition, season, round?)` | "tabela na rodada 20" |
-| `explainDataSource(entityType, id)` | "de onde vem esse dado?" |
-| `resolveEntity(name, type)` | desambiguação "qual 'Botafogo'?" — usa alias + trgm |
-| `suggestFilters(question)` | converte pergunta em filtros da busca avançada |
+| Tool                                              | Responde perguntas como                                                    |
+| ------------------------------------------------- | -------------------------------------------------------------------------- |
+| `getLiveMatches()`                                | "quais jogos estão rolando?"                                               |
+| `getMatchDetail(matchId)`                         | "como está o jogo do Flamengo?"                                            |
+| `getTeamRecentStats(team, window, scope, metric)` | "média de escanteios do Flamengo nos últimos 10 jogos"                     |
+| `getTeamSeasonStats(team, season, scope)`         | "quantos gols o Palmeiras sofreu fora de casa?"                            |
+| `getRefereeProfile(referee, season?)`             | "quantos cartões esse árbitro dá por jogo?"                                |
+| `getStadiumStats(stadium, season?)`               | "qual a média de gols no Maracanã?"                                        |
+| `getHeadToHead(teamA, teamB)`                     | "histórico de Grenal"                                                      |
+| `searchMatches(filtros)`                          | "jogos do Corinthians com +10 escanteios em 2024"                          |
+| `getCompetitionStats(competition, season)`        | "qual campeonato tem mais cartões?"                                        |
+| `getPlayerDisciplinaryHistory(player)`            | "cartões do Felipe Melo contra o Palmeiras" (V1 se granularidade permitir) |
+| `getStandings(competition, season, round?)`       | "tabela na rodada 20"                                                      |
+| `explainDataSource(entityType, id)`               | "de onde vem esse dado?"                                                   |
+| `resolveEntity(name, type)`                       | desambiguação "qual 'Botafogo'?" — usa alias + trgm                        |
+| `suggestFilters(question)`                        | converte pergunta em filtros da busca avançada                             |
 
 Regras: máx. 5 tool calls por pergunta; timeout 10 s por tool; resultados
 truncados a N linhas com aviso explícito de truncamento.
@@ -86,7 +86,7 @@ O catálogo **nasce fechado e cresce guiado por demanda real**:
 3. A resposta de recusa informa o usuário: "ainda não tenho essa consulta —
    ela foi registrada para priorização".
 4. **NL→SQL não entra no MVP/V1.** Só na V2, se a fila de recusas justificar,
-   como modo *experimental* explicitamente marcado, sandboxed (usuário
+   como modo _experimental_ explicitamente marcado, sandboxed (usuário
    Postgres read-only, allowlist de tabelas, validação de AST, timeout curto)
    e nunca como caminho padrão — a promessa "nunca inventa" tem precedência.
 
@@ -115,23 +115,23 @@ O catálogo **nasce fechado e cresce guiado por demanda real**:
 
 ## Casos de borda (comportamento definido, não improvisado)
 
-| Caso | Comportamento |
-|---|---|
-| Dado inexistente | "Não temos esse dado" + o que temos de mais próximo + por quê (coverage_level) |
-| Dado incompleto | Responde com o disponível + limitação explícita ("só 2 das 3 temporadas") |
-| Dado conflitante | (V2) Mostra fonte primária + nota de divergência |
-| Dado desatualizado | Sempre mostra `computed_at`; se partida ao vivo, avisa que consolida após o jogo |
-| Pergunta ambígua | `resolveEntity` → pede desambiguação com opções clicáveis |
-| Fonte externa não integrada | "Não cobrimos X (ex.: mercado de transferências)" — sem tentar responder |
-| Fato × opinião | Responde o fato com dados; opinião declarada como interpretação, sem números inventados |
-| Probabilidade/previsão | **Não prevê.** Mostra padrão histórico ("nos últimos 20 jogos, 65 % tiveram +9 escanteios") com aviso: padrão ≠ previsão. Nunca sugerir aposta |
+| Caso                        | Comportamento                                                                                                                                  |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| Dado inexistente            | "Não temos esse dado" + o que temos de mais próximo + por quê (coverage_level)                                                                 |
+| Dado incompleto             | Responde com o disponível + limitação explícita ("só 2 das 3 temporadas")                                                                      |
+| Dado conflitante            | (V2) Mostra fonte primária + nota de divergência                                                                                               |
+| Dado desatualizado          | Sempre mostra `computed_at`; se partida ao vivo, avisa que consolida após o jogo                                                               |
+| Pergunta ambígua            | `resolveEntity` → pede desambiguação com opções clicáveis                                                                                      |
+| Fonte externa não integrada | "Não cobrimos X (ex.: mercado de transferências)" — sem tentar responder                                                                       |
+| Fato × opinião              | Responde o fato com dados; opinião declarada como interpretação, sem números inventados                                                        |
+| Probabilidade/previsão      | **Não prevê.** Mostra padrão histórico ("nos últimos 20 jogos, 65 % tiveram +9 escanteios") com aviso: padrão ≠ previsão. Nunca sugerir aposta |
 
 ## Segurança
 
 - **Prompt injection**: conteúdo de banco/usuário nunca vira instrução —
   resultados de tools entram como dados delimitados; instruções fixas no
   system prompt; tools são read-only por construção (role Postgres de leitura
-  + statement timeout); sem tool de "executar SQL".
+  - statement timeout); sem tool de "executar SQL".
 - **Abuso**: rate limit por usuário/plano; moderação de entrada (Haiku) para
   desvio de finalidade; cap de custo diário global com desligamento gracioso.
 - **Auditoria**: `ai_query`/`ai_answer` guardam pergunta, tools+args,

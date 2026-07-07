@@ -4,18 +4,18 @@
 
 **Confiabilidade antes de abrangência.** Melhor 3 competições com dados
 auditáveis do que 30 com buracos silenciosos. Todo dado no sistema responde a
-três perguntas: *de onde veio? quando? quão confiável é?*
+três perguntas: _de onde veio? quando? quão confiável é?_
 
 ## Classificação dos dados
 
-| Categoria | Exemplos | Origem | Atualização |
-|---|---|---|---|
-| **Referência** | países, competições, times, estádios, árbitros, jogadores | Provedor (backfill) + curadoria manual | Batch diário/semanal |
-| **Calendário** | partidas futuras, horários, adiamentos | Provedor | Batch diário + checagem D-1 |
-| **Ao vivo** | placar, eventos, stats em andamento | Provedor | Polling 15–60 s durante a janela ao vivo |
-| **Consolidado** | resultado final, stats fechadas, escalações finais | Provedor (re-fetch pós-jogo) | T+2 h e T+24 h |
-| **Derivado** | médias, standings, perfis de árbitro, "últimos 10 jogos" | **Calculado por nós** a partir dos consolidados | Recalculado pós-jogo |
-| **Usuário** | contas, perguntas de IA, preferências | Interno | Tempo real |
+| Categoria       | Exemplos                                                  | Origem                                          | Atualização                              |
+| --------------- | --------------------------------------------------------- | ----------------------------------------------- | ---------------------------------------- |
+| **Referência**  | países, competições, times, estádios, árbitros, jogadores | Provedor (backfill) + curadoria manual          | Batch diário/semanal                     |
+| **Calendário**  | partidas futuras, horários, adiamentos                    | Provedor                                        | Batch diário + checagem D-1              |
+| **Ao vivo**     | placar, eventos, stats em andamento                       | Provedor                                        | Polling 15–60 s durante a janela ao vivo |
+| **Consolidado** | resultado final, stats fechadas, escalações finais        | Provedor (re-fetch pós-jogo)                    | T+2 h e T+24 h                           |
+| **Derivado**    | médias, standings, perfis de árbitro, "últimos 10 jogos"  | **Calculado por nós** a partir dos consolidados | Recalculado pós-jogo                     |
+| **Usuário**     | contas, perguntas de IA, preferências                     | Interno                                         | Tempo real                               |
 
 **Regra de ouro**: dados derivados são sempre recalculáveis do zero a partir
 dos dados-base + payloads brutos arquivados. Nunca editar derivado à mão.
@@ -72,12 +72,12 @@ de tolerância; nunca fazer média silenciosa de fontes.
 
 ## Tipos de provedores
 
-| Tipo | Exemplos (a validar, sem assumir preço/disponibilidade) | Perfil |
-|---|---|---|
-| Indie-friendly por assinatura | API-Football (API-Sports), Sportmonks, Football-Data.org (grátis, limitado) | Preço acessível, cobertura ampla mas qualidade variável por liga |
-| Profissional B2B | Sportradar, Stats Perform/Opta, Genius Sports | Qualidade e SLA altos; contrato enterprise, provavelmente inviável no MVP |
-| Analítico especializado | StatsBomb, Wyscout/Hudl | Dados ricos (xG, tracking); foco em clubes, não em live scores |
-| Scraping | SofaScore, ge, oGol | **Descartado**: risco legal + fragilidade |
+| Tipo                          | Exemplos (a validar, sem assumir preço/disponibilidade)                     | Perfil                                                                    |
+| ----------------------------- | --------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| Indie-friendly por assinatura | API-Football (API-Sports), Sportmonks, Football-Data.org (grátis, limitado) | Preço acessível, cobertura ampla mas qualidade variável por liga          |
+| Profissional B2B              | Sportradar, Stats Perform/Opta, Genius Sports                               | Qualidade e SLA altos; contrato enterprise, provavelmente inviável no MVP |
+| Analítico especializado       | StatsBomb, Wyscout/Hudl                                                     | Dados ricos (xG, tracking); foco em clubes, não em live scores            |
+| Scraping                      | SofaScore, ge, oGol                                                         | **Descartado**: risco legal + fragilidade                                 |
 
 ## Critérios de avaliação (checklist da Fase 0)
 
@@ -106,7 +106,7 @@ manual). Decidir com dados, não com marketing.
    ingestão de histórico + agregados. Valida modelo de dados e qualidade.
 2. **MVP**: + ao vivo na Série A, + Copa do Brasil e Libertadores se a
    cobertura passar no teste.
-3. **V1**: + Série B/estaduais *se* a cobertura for aceitável; + página de
+3. **V1**: + Série B/estaduais _se_ a cobertura for aceitável; + página de
    jogador completa.
 4. **V2**: segundo provedor para redundância/reconciliação nas competições
    core.

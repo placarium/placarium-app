@@ -11,8 +11,8 @@ consultando exclusivamente esses dados.
 
 ## Problema que resolve
 
-Hoje, quem quer responder uma pergunta como *"quantos cartões esse árbitro dá
-por jogo em clássicos?"* precisa:
+Hoje, quem quer responder uma pergunta como _"quantos cartões esse árbitro dá
+por jogo em clássicos?"_ precisa:
 
 1. Garimpar 3–4 sites (SofaScore, ge, Wikipedia, oGol), cada um com recorte
    diferente e sem dizer de onde o dado veio;
@@ -29,20 +29,20 @@ mais rasa.
 
 ## Personas
 
-| Persona | Job-to-be-done | Disposição a pagar (hipótese) |
-|---|---|---|
-| Torcedor avançado | Acompanhar o time com contexto que o placar não dá | Baixa–média |
-| Apostador analítico | Basear decisões em padrões históricos verificáveis (sem tips, sem incentivo — só dados) | **Alta** |
-| Criador de conteúdo / jornalista | Estatística citável com fonte, rápida de achar antes do deadline/vídeo | Média–alta |
-| Analista de desempenho / scout | Filtros cruzados e exportação para relatórios | Alta (B2B) |
-| Fantasy player (Cartola) | Tendências de scout por jogador/adversário | Média |
-| Clube pequeno | Análise de adversário sem pagar Wyscout | Média (B2B) |
-| Usuário comum | Ver jogos de hoje com mais contexto | Nula (topo de funil) |
+| Persona                          | Job-to-be-done                                                                          | Disposição a pagar (hipótese) |
+| -------------------------------- | --------------------------------------------------------------------------------------- | ----------------------------- |
+| Torcedor avançado                | Acompanhar o time com contexto que o placar não dá                                      | Baixa–média                   |
+| Apostador analítico              | Basear decisões em padrões históricos verificáveis (sem tips, sem incentivo — só dados) | **Alta**                      |
+| Criador de conteúdo / jornalista | Estatística citável com fonte, rápida de achar antes do deadline/vídeo                  | Média–alta                    |
+| Analista de desempenho / scout   | Filtros cruzados e exportação para relatórios                                           | Alta (B2B)                    |
+| Fantasy player (Cartola)         | Tendências de scout por jogador/adversário                                              | Média                         |
+| Clube pequeno                    | Análise de adversário sem pagar Wyscout                                                 | Média (B2B)                   |
+| Usuário comum                    | Ver jogos de hoje com mais contexto                                                     | Nula (topo de funil)          |
 
 **Persona-alvo do MVP**: apostador analítico + criador de conteúdo. São os que
 sentem a dor com mais frequência (toda rodada), verbalizam perguntas
 específicas (encaixa na IA) e têm referência de pagamento (já assinam
-FootyStats, RedGol etc.). *Hipótese a validar na Fase 0 com entrevistas.*
+FootyStats, RedGol etc.). _Hipótese a validar na Fase 0 com entrevistas._
 
 ## Diferencial competitivo
 
@@ -91,43 +91,43 @@ FootyStats, RedGol etc.). *Hipótese a validar na Fase 0 com entrevistas.*
 
 ## Princípio
 
-O MVP existe para validar UMA tese: *"pessoas analíticas pagam por estatística
+O MVP existe para validar UMA tese: _"pessoas analíticas pagam por estatística
 de futebol cruzável, confiável e perguntável em linguagem natural, focada no
-Brasil"*. Tudo que não testa essa tese fica fora.
+Brasil"_. Tudo que não testa essa tese fica fora.
 
 ## Dentro do MVP
 
-| Item | Por quê |
-|---|---|
-| **3 competições**: Brasileirão Série A, Copa do Brasil, Libertadores | Suficiente para a persona-alvo; limita custo de dados. Fallback: só Série A |
-| **1 provedor de dados** | Reconciliação multi-fonte é V2; 1 fonte bem auditada > 2 mal integradas |
-| Placar ao vivo + timeline de eventos (atraso ≤ 60 s) | Tese exige "ao vivo", mas 60 s bastam — não é produto de trading |
-| Histórico de 3 temporadas | Mínimo para médias móveis fazerem sentido ("últimos 10 jogos") |
-| Páginas: home/ao vivo, partida, time, campeonato, árbitro (perfil básico derivado) | Núcleo navegável |
-| Filtros essenciais: por time, competição, temporada, mandante/visitante, período do jogo | Cobrem 80 % das perguntas-exemplo |
-| Estatísticas agregadas materializadas (médias de gols, cartões, escanteios por time/árbitro/estádio) | É o diferencial; derivável dos eventos que já ingerimos |
-| **IA conversacional com 8–12 tools fechadas** | Escopo controlado; sem SQL livre |
-| Badge de origem/timestamp/confiança em todo dado | Diferencial nº 1; barato se nascer no modelo de dados |
-| Auth simples (magic link + Google) | Necessária para limitar custo de IA por usuário |
-| Admin mínimo: status de ingestão + fila de data quality | Sem isso, operar às cegas |
-| Observabilidade essencial: Sentry, logs estruturados, uptime | Custo baixo, evita voar às cegas |
+| Item                                                                                                 | Por quê                                                                     |
+| ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| **3 competições**: Brasileirão Série A, Copa do Brasil, Libertadores                                 | Suficiente para a persona-alvo; limita custo de dados. Fallback: só Série A |
+| **1 provedor de dados**                                                                              | Reconciliação multi-fonte é V2; 1 fonte bem auditada > 2 mal integradas     |
+| Placar ao vivo + timeline de eventos (atraso ≤ 60 s)                                                 | Tese exige "ao vivo", mas 60 s bastam — não é produto de trading            |
+| Histórico de 3 temporadas                                                                            | Mínimo para médias móveis fazerem sentido ("últimos 10 jogos")              |
+| Páginas: home/ao vivo, partida, time, campeonato, árbitro (perfil básico derivado)                   | Núcleo navegável                                                            |
+| Filtros essenciais: por time, competição, temporada, mandante/visitante, período do jogo             | Cobrem 80 % das perguntas-exemplo                                           |
+| Estatísticas agregadas materializadas (médias de gols, cartões, escanteios por time/árbitro/estádio) | É o diferencial; derivável dos eventos que já ingerimos                     |
+| **IA conversacional com 8–12 tools fechadas**                                                        | Escopo controlado; sem SQL livre                                            |
+| Badge de origem/timestamp/confiança em todo dado                                                     | Diferencial nº 1; barato se nascer no modelo de dados                       |
+| Auth simples (magic link + Google)                                                                   | Necessária para limitar custo de IA por usuário                             |
+| Admin mínimo: status de ingestão + fila de data quality                                              | Sem isso, operar às cegas                                                   |
+| Observabilidade essencial: Sentry, logs estruturados, uptime                                         | Custo baixo, evita voar às cegas                                            |
 
 ## Fora do MVP (e por quê)
 
-| Item | Destino | Motivo |
-|---|---|---|
-| Odds | Avaliar na V2+, com jurídico | Risco legal/licenciamento; não testa a tese |
-| Alertas/push | V1 | Exige infra de notificação; valor só com base de usuários |
-| Comparador visual de times | V1 | A IA cobre o caso de uso no MVP |
-| Multi-provedor + reconciliação automática | V2 | Complexidade alta; começar com flags de qualidade manuais |
-| Página de jogador completa | V1 | Depende de granularidade do provedor; perfil básico ok |
-| App nativo | Futuro | Web responsiva valida a tese |
-| API pública / B2B | Futuro | Sem demanda comprovada ainda |
-| xG e métricas avançadas | V2 | Ou vem caro do provedor, ou exige modelo próprio |
-| Internacionalização | Futuro | BR-first é o diferencial |
-| Billing | Fase 5 | Validar disposição a pagar com waitlist/entrevistas antes |
-| Websockets | V1 | Polling sobre cache atende 60 s de atraso por fração do esforço |
-| Estaduais e Série B | V1+ | Cobertura de provedor tipicamente pior; validar antes |
+| Item                                      | Destino                      | Motivo                                                          |
+| ----------------------------------------- | ---------------------------- | --------------------------------------------------------------- |
+| Odds                                      | Avaliar na V2+, com jurídico | Risco legal/licenciamento; não testa a tese                     |
+| Alertas/push                              | V1                           | Exige infra de notificação; valor só com base de usuários       |
+| Comparador visual de times                | V1                           | A IA cobre o caso de uso no MVP                                 |
+| Multi-provedor + reconciliação automática | V2                           | Complexidade alta; começar com flags de qualidade manuais       |
+| Página de jogador completa                | V1                           | Depende de granularidade do provedor; perfil básico ok          |
+| App nativo                                | Futuro                       | Web responsiva valida a tese                                    |
+| API pública / B2B                         | Futuro                       | Sem demanda comprovada ainda                                    |
+| xG e métricas avançadas                   | V2                           | Ou vem caro do provedor, ou exige modelo próprio                |
+| Internacionalização                       | Futuro                       | BR-first é o diferencial                                        |
+| Billing                                   | Fase 5                       | Validar disposição a pagar com waitlist/entrevistas antes       |
+| Websockets                                | V1                           | Polling sobre cache atende 60 s de atraso por fração do esforço |
+| Estaduais e Série B                       | V1+                          | Cobertura de provedor tipicamente pior; validar antes           |
 
 ## Funcionalidades perigosas no início
 

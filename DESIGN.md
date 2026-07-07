@@ -25,46 +25,46 @@ o dado vivo; o ponto/capsula superior representa evento, alerta ou insight.
 
 Os assets ficam em `assets/brand/`, separados por uso.
 
-| Uso | Dark | Light |
-|---|---|---|
+| Uso           | Dark                                                          | Light                                                          |
+| ------------- | ------------------------------------------------------------- | -------------------------------------------------------------- |
 | Logo completa | `assets/brand/logo-completa/placarium-logo-completa-dark.svg` | `assets/brand/logo-completa/placarium-logo-completa-light.svg` |
-| Simbolo | `assets/brand/simbolo/placarium-simbolo-dark.svg` | `assets/brand/simbolo/placarium-simbolo-light.svg` |
-| App icon | `assets/brand/app-icon/placarium-app-icon-dark.svg` | `assets/brand/app-icon/placarium-app-icon-light.svg` |
-| Icone pequeno | `assets/brand/icon-small/placarium-icon-small-dark.svg` | `assets/brand/icon-small/placarium-icon-small-light.svg` |
-| Wordmark | `assets/brand/wordmark/placarium-wordmark-dark.svg` | `assets/brand/wordmark/placarium-wordmark-light.svg` |
-| Board geral | `assets/brand/preview/placarium-brand-board.svg` | - |
+| Simbolo       | `assets/brand/simbolo/placarium-simbolo-dark.svg`             | `assets/brand/simbolo/placarium-simbolo-light.svg`             |
+| App icon      | `assets/brand/app-icon/placarium-app-icon-dark.svg`           | `assets/brand/app-icon/placarium-app-icon-light.svg`           |
+| Icone pequeno | `assets/brand/icon-small/placarium-icon-small-dark.svg`       | `assets/brand/icon-small/placarium-icon-small-light.svg`       |
+| Wordmark      | `assets/brand/wordmark/placarium-wordmark-dark.svg`           | `assets/brand/wordmark/placarium-wordmark-light.svg`           |
+| Board geral   | `assets/brand/preview/placarium-brand-board.svg`              | -                                                              |
 
 ## Paleta
 
 ### Core tokens
 
-| Token | Dark | Light | Uso |
-|---|---|---|---|
-| `bg` | `#141110` | `#FAF7F2` | Fundo principal |
-| `surface` | `#1C1917` | `#FFFFFF` | Cards, tabelas, modais |
-| `surface-2` | `#262019` | `#F1ECE3` | Hover, linhas alternadas, chips |
-| `border` | `#3A322A` | `#E0D8CC` | Bordas e divisores |
-| `text` | `#F0EBE4` | `#1C1917` | Texto principal |
-| `text-2` | `#A89F94` | `#57534E` | Texto secundario |
-| `text-3` | `#6E665C` | `#A8A29E` | Muted, timestamps |
-| `primary` | `#FF6B35` | `#D9480F` | Marca, links, CTA, tabs |
-| `primary-hover` | `#FF8657` | `#B93A0A` | Hover/active |
-| `primary-subtle` | `#3B2114` | `#FFE8DC` | Destaques suaves |
-| `on-primary` | `#401803` | `#FFFFFF` | Texto sobre primary |
+| Token            | Dark      | Light     | Uso                             |
+| ---------------- | --------- | --------- | ------------------------------- |
+| `bg`             | `#141110` | `#FAF7F2` | Fundo principal                 |
+| `surface`        | `#1C1917` | `#FFFFFF` | Cards, tabelas, modais          |
+| `surface-2`      | `#262019` | `#F1ECE3` | Hover, linhas alternadas, chips |
+| `border`         | `#3A322A` | `#E0D8CC` | Bordas e divisores              |
+| `text`           | `#F0EBE4` | `#1C1917` | Texto principal                 |
+| `text-2`         | `#A89F94` | `#57534E` | Texto secundario                |
+| `text-3`         | `#6E665C` | `#A8A29E` | Muted, timestamps               |
+| `primary`        | `#FF6B35` | `#D9480F` | Marca, links, CTA, tabs         |
+| `primary-hover`  | `#FF8657` | `#B93A0A` | Hover/active                    |
+| `primary-subtle` | `#3B2114` | `#FFE8DC` | Destaques suaves                |
+| `on-primary`     | `#401803` | `#FFFFFF` | Texto sobre primary             |
 
 ### Semantica
 
 As cores semanticas nao devem competir com a marca. A marca e laranja
 queimado, nunca amarelo/ambar.
 
-| Token | Hex | Uso |
-|---|---|---|
-| `win` / `success` | `#2FBF71` | Vitoria, confirmacoes |
-| `loss` / `danger` | `#E5484D` | Derrota, cartao vermelho, erro |
-| `draw` | `#A89F94` | Empate |
-| `card-yellow` | `#FFD60A` | Cartao amarelo em chip com formato de cartao |
-| `live` | `#FF4757` | Indicador de jogo ao vivo |
-| `derived` | `#6CA0F5` | Dado derivado ou formula |
+| Token             | Hex       | Uso                                          |
+| ----------------- | --------- | -------------------------------------------- |
+| `win` / `success` | `#2FBF71` | Vitoria, confirmacoes                        |
+| `loss` / `danger` | `#E5484D` | Derrota, cartao vermelho, erro               |
+| `draw`            | `#A89F94` | Empate                                       |
+| `card-yellow`     | `#FFD60A` | Cartao amarelo em chip com formato de cartao |
+| `live`            | `#FF4757` | Indicador de jogo ao vivo                    |
+| `derived`         | `#6CA0F5` | Dado derivado ou formula                     |
 
 ## Regras de logo
 
@@ -84,13 +84,13 @@ queimado, nunca amarelo/ambar.
 
 ## Tamanho minimo
 
-| Asset | Minimo recomendado |
-|---|---|
-| Logo completa | 144 px de largura |
-| Simbolo | 24 px |
-| Icone pequeno | 16 px |
-| App icon | 128 px |
-| Wordmark isolado | 96 px de largura |
+| Asset            | Minimo recomendado |
+| ---------------- | ------------------ |
+| Logo completa    | 144 px de largura  |
+| Simbolo          | 24 px              |
+| Icone pequeno    | 16 px              |
+| App icon         | 128 px             |
+| Wordmark isolado | 96 px de largura   |
 
 Em tamanhos abaixo de 24 px, use o icone pequeno. Ele tem geometria mais
 compacta e evita que o ponto superior perca legibilidade.
@@ -148,4 +148,3 @@ um analista seguro, nao como um palpiteiro.
 - Gradientes grandes, sombras dramáticas ou efeitos 3D.
 - Texto pequeno dentro de chips sem icone/forma.
 - Logos alternativas sem relacao com o monograma grafico.
-

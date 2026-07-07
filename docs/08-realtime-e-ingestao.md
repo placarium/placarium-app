@@ -2,14 +2,14 @@
 
 ## Escolha do mecanismo
 
-| Opção | Quando faz sentido | Decisão |
-|---|---|---|
-| Polling (worker→provedor) | Sempre disponível, controlável, observável | ✅ MVP |
-| Webhooks do provedor | Se o provedor oferecer com confiabilidade | Usar como **acelerador** do polling (nunca substituto: webhook perdido = buraco silencioso) |
-| Streaming do provedor | Planos enterprise | Escala futura |
-| Polling (cliente→nossa API) | Simples, cacheável, funciona em serverless | ✅ MVP (10–20 s, ETag/304) |
-| SSE (nossa API→cliente) | Reduz latência e requests | V1, servido pelo worker |
-| WebSockets | Bidirecional — não precisamos | Só se produto exigir (chat ao vivo etc.) |
+| Opção                       | Quando faz sentido                         | Decisão                                                                                     |
+| --------------------------- | ------------------------------------------ | ------------------------------------------------------------------------------------------- |
+| Polling (worker→provedor)   | Sempre disponível, controlável, observável | ✅ MVP                                                                                      |
+| Webhooks do provedor        | Se o provedor oferecer com confiabilidade  | Usar como **acelerador** do polling (nunca substituto: webhook perdido = buraco silencioso) |
+| Streaming do provedor       | Planos enterprise                          | Escala futura                                                                               |
+| Polling (cliente→nossa API) | Simples, cacheável, funciona em serverless | ✅ MVP (10–20 s, ETag/304)                                                                  |
+| SSE (nossa API→cliente)     | Reduz latência e requests                  | V1, servido pelo worker                                                                     |
+| WebSockets                  | Bidirecional — não precisamos              | Só se produto exigir (chat ao vivo etc.)                                                    |
 
 ## Fluxo completo de uma partida
 
@@ -48,7 +48,7 @@
 - **Prioridade por importância**: `competition.tier` + flag `is_derby` →
   partidas tier 1 pollam a 15 s, tier 2 a 30 s quando o rate limit apertar.
   Orçamento de requests calculado dinamicamente: `budget_por_min =
-  rate_limit × 0.7` (30 % de folga), distribuído por prioridade.
+rate_limit × 0.7` (30 % de folga), distribuído por prioridade.
 - **Jogos simultâneos**: rodada cheia ≈ 10 jogos × 1 req/15 s ≈ 40 req/min —
   validar contra o plano do provedor na Fase 0; é O(jogos), não O(usuários),
   porque **usuários leem do nosso cache, nunca do provedor**.
@@ -91,4 +91,4 @@ tardias — gol trocado de autor, cartão ajustado):
 - Fora de janela ao vivo, o sistema faz ~0 chamadas externas (só crons
   diários) — custo de provedor é função de jogos, previsível por calendário.
 - Métrica-guia: `requests_ao_provedor / partida` e `% do rate limit usado no
-  pico de rodada`.
+pico de rodada`.

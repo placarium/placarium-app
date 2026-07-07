@@ -21,17 +21,17 @@
 
 ## Telas do MVP
 
-| Tela | Mobile prioriza | Desktop adiciona |
-|---|---|---|
-| **Home / Jogos ao vivo** | Jogos de hoje por competição, placar+minuto+ícones de evento, "atualizado há Xs" | Multicoluna, stats rápidas inline (posse, escanteios) |
-| **Partida** | Placar fixo no topo, tabs: Timeline / Stats / Escalações / H2H | Timeline e stats lado a lado; gráfico de pressão por período |
-| **Time** | Forma recente (5 jogos), próximos jogos, médias-chave em cards | Tabelas completas casa/fora, 1º/2º tempo, evolução na temporada |
-| **Campeonato** | Tabela compacta + rodada atual | Tabela completa + stats da competição + artilharia |
-| **Árbitro** | Cards: cartões/jogo, pênaltis, acréscimos médios | Lista de partidas apitadas com filtros |
-| **Explorar / Busca** | Busca por nome + filtros essenciais empilhados | Filtros combinados em painel lateral, resultados em tabela densa |
-| **Chat IA** | Conversa em tela cheia, respostas com cards de dados | Painel lateral persistente — perguntar sem sair da página |
-| **Fontes e confiabilidade** | Página estática: de onde vêm os dados, o que significam os badges | idem |
-| **Admin** (interno) | — | Jobs, quality issues, saúde do provedor |
+| Tela                        | Mobile prioriza                                                                  | Desktop adiciona                                                 |
+| --------------------------- | -------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| **Home / Jogos ao vivo**    | Jogos de hoje por competição, placar+minuto+ícones de evento, "atualizado há Xs" | Multicoluna, stats rápidas inline (posse, escanteios)            |
+| **Partida**                 | Placar fixo no topo, tabs: Timeline / Stats / Escalações / H2H                   | Timeline e stats lado a lado; gráfico de pressão por período     |
+| **Time**                    | Forma recente (5 jogos), próximos jogos, médias-chave em cards                   | Tabelas completas casa/fora, 1º/2º tempo, evolução na temporada  |
+| **Campeonato**              | Tabela compacta + rodada atual                                                   | Tabela completa + stats da competição + artilharia               |
+| **Árbitro**                 | Cards: cartões/jogo, pênaltis, acréscimos médios                                 | Lista de partidas apitadas com filtros                           |
+| **Explorar / Busca**        | Busca por nome + filtros essenciais empilhados                                   | Filtros combinados em painel lateral, resultados em tabela densa |
+| **Chat IA**                 | Conversa em tela cheia, respostas com cards de dados                             | Painel lateral persistente — perguntar sem sair da página        |
+| **Fontes e confiabilidade** | Página estática: de onde vêm os dados, o que significam os badges                | idem                                                             |
+| **Admin** (interno)         | —                                                                                | Jobs, quality issues, saúde do provedor                          |
 
 ## Componentes-chave
 

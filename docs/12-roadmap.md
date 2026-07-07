@@ -82,11 +82,11 @@ paralelo).
 
 ## Decisões antes de codar vs. adiáveis
 
-| Decidir JÁ (mudar depois é caro) | Adiar sem culpa |
-|---|---|
-| Provedor primário e termos de uso | Segundo provedor |
-| Modelo de dados core + proveniência | Warehouse analítico |
-| Monorepo/stack/hospedagem MVP | Migração para containers |
-| Padrão de dedup/idempotência | SSE vs polling do cliente |
-| Nome e domínio | Org GitHub, white-label, i18n |
-| Política de dados pessoais (LGPD mínimo) | Certificações formais |
+| Decidir JÁ (mudar depois é caro)         | Adiar sem culpa               |
+| ---------------------------------------- | ----------------------------- |
+| Provedor primário e termos de uso        | Segundo provedor              |
+| Modelo de dados core + proveniência      | Warehouse analítico           |
+| Monorepo/stack/hospedagem MVP            | Migração para containers      |
+| Padrão de dedup/idempotência             | SSE vs polling do cliente     |
+| Nome e domínio                           | Org GitHub, white-label, i18n |
+| Política de dados pessoais (LGPD mínimo) | Certificações formais         |

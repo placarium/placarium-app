@@ -9,7 +9,7 @@ dimensões (time, jogador, árbitro, estádio, campeonato, confronto) e uma
 camada de IA conversacional que **nunca inventa estatística** — toda resposta
 vem de ferramentas que consultam dados rastreáveis.
 
-O nome funde *placar* + *-arium* (planetário, aquário): o lugar onde o
+O nome funde _placar_ + _-arium_ (planetário, aquário): o lugar onde o
 futebol é **observado e estudado** — não mais um site de placar, e sim o
 observatório onde o dado confiável, auditável e cruzável mora.
 
@@ -21,26 +21,26 @@ desenvolvimento. Comece por [docs/16-recomendacoes-e-proximas-acoes.md](docs/16-
 
 ## Documentação
 
-| Doc | Conteúdo |
-|---|---|
-| [01](docs/01-visao-geral-e-mvp.md) | Visão geral do produto, personas, diferencial, escopo do MVP |
-| [02](docs/02-requisitos-funcionais.md) | Requisitos funcionais por módulo |
-| [03](docs/03-requisitos-nao-funcionais.md) | Requisitos não funcionais com metas por estágio |
-| [04](docs/04-estrategia-de-dados.md) | Estratégia de dados e avaliação de provedores |
-| [05](docs/05-modelo-de-dados.md) | Modelo de domínio, entidades, pseudo-schema |
-| [06](docs/06-arquitetura-tecnica.md) | Arquitetura técnica e stack |
-| [07](docs/07-system-design-e-infra.md) | System design, ambientes, hospedagem, deploy, resiliência |
-| [08](docs/08-realtime-e-ingestao.md) | Real-time e ingestão de eventos |
-| [09](docs/09-ia-e-confiabilidade.md) | Camada de IA, tools, anti-alucinação, evals |
-| [10](docs/10-ux-e-interface.md) | UX, telas do MVP, mobile/desktop |
-| [11](docs/11-modelo-de-negocio.md) | Hipóteses de monetização e validação |
-| [12](docs/12-roadmap.md) | Roadmap por fases (0 a 6) |
-| [13](docs/13-specs.md) | SPEC-001 a SPEC-020 |
-| [14](docs/14-seguranca-legal-compliance.md) | LGPD, licenciamento de dados, riscos legais |
-| [15](docs/15-riscos-e-tradeoffs.md) | Matriz de riscos e trade-offs |
-| [16](docs/16-recomendacoes-e-proximas-acoes.md) | Recomendação objetiva e plano dos próximos 7 dias |
-| [17](docs/17-identidade-visual.md) | Identidade visual: paleta de cores e tokens |
-| [18](docs/18-provedores-pricing-e-orcamento.md) | Provedores: pricing, demanda estimada e orçamento do MVP |
+| Doc                                             | Conteúdo                                                     |
+| ----------------------------------------------- | ------------------------------------------------------------ |
+| [01](docs/01-visao-geral-e-mvp.md)              | Visão geral do produto, personas, diferencial, escopo do MVP |
+| [02](docs/02-requisitos-funcionais.md)          | Requisitos funcionais por módulo                             |
+| [03](docs/03-requisitos-nao-funcionais.md)      | Requisitos não funcionais com metas por estágio              |
+| [04](docs/04-estrategia-de-dados.md)            | Estratégia de dados e avaliação de provedores                |
+| [05](docs/05-modelo-de-dados.md)                | Modelo de domínio, entidades, pseudo-schema                  |
+| [06](docs/06-arquitetura-tecnica.md)            | Arquitetura técnica e stack                                  |
+| [07](docs/07-system-design-e-infra.md)          | System design, ambientes, hospedagem, deploy, resiliência    |
+| [08](docs/08-realtime-e-ingestao.md)            | Real-time e ingestão de eventos                              |
+| [09](docs/09-ia-e-confiabilidade.md)            | Camada de IA, tools, anti-alucinação, evals                  |
+| [10](docs/10-ux-e-interface.md)                 | UX, telas do MVP, mobile/desktop                             |
+| [11](docs/11-modelo-de-negocio.md)              | Hipóteses de monetização e validação                         |
+| [12](docs/12-roadmap.md)                        | Roadmap por fases (0 a 6)                                    |
+| [13](docs/13-specs.md)                          | SPEC-001 a SPEC-020                                          |
+| [14](docs/14-seguranca-legal-compliance.md)     | LGPD, licenciamento de dados, riscos legais                  |
+| [15](docs/15-riscos-e-tradeoffs.md)             | Matriz de riscos e trade-offs                                |
+| [16](docs/16-recomendacoes-e-proximas-acoes.md) | Recomendação objetiva e plano dos próximos 7 dias            |
+| [17](docs/17-identidade-visual.md)              | Identidade visual: paleta de cores e tokens                  |
+| [18](docs/18-provedores-pricing-e-orcamento.md) | Provedores: pricing, demanda estimada e orçamento do MVP     |
 
 ## Decisões de fundação (resumo)
 

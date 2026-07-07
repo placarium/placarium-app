@@ -3,11 +3,12 @@
 ## Recomendação objetiva
 
 Se eu fosse construir isto do zero, sozinho, otimizando velocidade + qualidade
-+ confiabilidade + custo controlado + evolução:
+
+- confiabilidade + custo controlado + evolução:
 
 1. **Nome**: **Placarium** (decisão do fundador em 2026-07-06; substituiu
    "StatsHub", descartado por colisão direta com statshub.com — concorrente
-   ativo no mesmo nicho — e "Súmula") — palavra cunhada, *placar* + *-arium*:
+   ativo no mesmo nicho — e "Súmula") — palavra cunhada, _placar_ + _-arium_:
    o observatório do futebol. Verificado em 2026-07-06: `placarium.com.br` e
    `placarium.app` livres (RDAP), org GitHub `placarium` livre, zero colisão
    de produto na web. Repo: `placarium-app`. **Registrar os domínios
@@ -52,16 +53,16 @@ resumo das entrevistas, e o golden set inicial de perguntas.
 
 ### Métricas de sucesso do MVP
 
-| Métrica | Meta |
-|---|---|
-| Retenção W1 dos cadastrados | ≥ 40 % |
-| Retenção W4 | ≥ 25 % |
-| Ativos usando IA/filtros ≥ 1×/semana | ≥ 30 % |
-| Alucinação numérica no golden set | 0 |
-| Atraso ao vivo ponta a ponta | ≤ 60 s |
-| Eventos perdidos pós-consolidação | 0 |
-| Intenção de pagamento (waitlist Pro) | ≥ 5 % dos ativos |
-| Custo por usuário ativo/mês | < preço planejado do Pro |
+| Métrica                              | Meta                     |
+| ------------------------------------ | ------------------------ |
+| Retenção W1 dos cadastrados          | ≥ 40 %                   |
+| Retenção W4                          | ≥ 25 %                   |
+| Ativos usando IA/filtros ≥ 1×/semana | ≥ 30 %                   |
+| Alucinação numérica no golden set    | 0                        |
+| Atraso ao vivo ponta a ponta         | ≤ 60 s                   |
+| Eventos perdidos pós-consolidação    | 0                        |
+| Intenção de pagamento (waitlist Pro) | ≥ 5 % dos ativos         |
+| Custo por usuário ativo/mês          | < preço planejado do Pro |
 
 ---
 
@@ -70,6 +71,7 @@ resumo das entrevistas, e o golden set inicial de perguntas.
 > Premissa: 1 dev full-stack, dedicação alta. Ajustar proporcionalmente.
 
 ## Dia 1 — Provedores: shortlist e inscrição
+
 - **Objetivo**: iniciar os trials (é o caminho crítico do projeto).
 - **Tarefas**: listar 3–4 candidatos (API-Football/API-Sports, Sportmonks,
   Football-Data.org como baseline grátis, +1 achado em pesquisa); criar contas
@@ -81,6 +83,7 @@ resumo das entrevistas, e o golden set inicial de perguntas.
 - **Risco**: cobertura de árbitro inexistente em ambos → acionar candidato 3.
 
 ## Dia 2 — Validação de dados com jogos reais
+
 - **Objetivo**: dados reais fluindo em scripts descartáveis.
 - **Tarefas**: scripts (fora do monorepo, `scratch/`) puxando: jogos de hoje,
   1 partida ao vivo (se houver), escalações, eventos, árbitro, histórico de 1
@@ -90,6 +93,7 @@ resumo das entrevistas, e o golden set inicial de perguntas.
 - **Risco**: sem jogo ao vivo no dia → usar replay de rodada do fim de semana.
 
 ## Dia 3 — Nome, repositório e fundação
+
 - **Objetivo**: fundação oficial do projeto.
 - **Tarefas**: registrar placarium.com.br (registro.br) e placarium.app +
   busca INPI (nome decidido: Placarium, verificado livre em 2026-07-06);
@@ -102,6 +106,7 @@ resumo das entrevistas, e o golden set inicial de perguntas.
   já está público no repositório.
 
 ## Dia 4 — Schema core + migrations
+
 - **Objetivo**: SPEC-003.
 - **Tarefas**: schema core/ingest/app em Drizzle; migrations; seed de
   referência (competições, times da Série A); factories de teste; projetos
@@ -111,6 +116,7 @@ resumo das entrevistas, e o golden set inicial de perguntas.
 - **Risco**: sobre-modelar. Regra: só tabelas que o MVP lê ou escreve.
 
 ## Dia 5 — Cliente do provedor + normalizadores
+
 - **Objetivo**: SPEC-004 no provedor líder da matriz.
 - **Tarefas**: client tipado com rate limiter; normalizadores puros
   payload→canônico; testes com as fixtures do Dia 2; provider_entity_map;
@@ -122,6 +128,7 @@ resumo das entrevistas, e o golden set inicial de perguntas.
   entity_map existe para absorver; documentar o achado na matriz.
 
 ## Dia 6 — Backfill + primeiras respostas analíticas
+
 - **Objetivo**: PoC de valor (marco da Fase 1).
 - **Tarefas**: job de backfill (1 temporada da Série A, respeitando rate
   limit); MVs team_season/referee_profile; responder em SQL: média de
@@ -134,6 +141,7 @@ resumo das entrevistas, e o golden set inicial de perguntas.
   se aceita, completa manual ou troca de provedor.
 
 ## Dia 7 — Consolidação e go/no-go da Fase 2
+
 - **Objetivo**: fechar Fase 0/1 com decisão consciente.
 - **Tarefas**: preencher matriz final; escrever ADR-001 (provedor) e ADR-002
   (nome) no repo; agendar 5 entrevistas com persona-alvo para a semana 2;

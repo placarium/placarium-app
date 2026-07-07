@@ -6,4 +6,3 @@ Tokens de cor da marca Placarium em formatos reutilizaveis.
 - `colors.css`: variaveis CSS prontas para prototipos e app web.
 
 O tema claro fica em `:root`; o dark mode usa `[data-theme="dark"]`.
-

@@ -5,12 +5,12 @@ entra na Fase 5, depois de sinal claro de disposição a pagar.
 
 ## Hipótese principal: freemium B2C → B2B depois
 
-| Camada | O quê | Por quê |
-|---|---|---|
-| **Free** | Ao vivo, páginas de time/campeonato/partida, histórico da temporada atual, 10 perguntas de IA/dia | Topo de funil + SEO; o básico é comoditizado, não dá para cobrar |
-| **Pro (individual)** | Histórico completo, filtros avançados/salvos, IA com limite alto, export CSV, (V1) alertas estatísticos | A dor real da persona-alvo está no cruzamento e na profundidade |
-| **Creator/Analista** | Tudo do Pro + gráficos exportáveis com marca, relatórios pré-jogo gerados | Valor profissional direto (conteúdo citável) |
-| **B2B (futuro)** | API própria, white-label de widgets, relatórios para clubes/mídia | Só com marca e dados validados; exige revisão de licença com o provedor (revenda de dados é cláusula sensível) |
+| Camada               | O quê                                                                                                   | Por quê                                                                                                        |
+| -------------------- | ------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| **Free**             | Ao vivo, páginas de time/campeonato/partida, histórico da temporada atual, 10 perguntas de IA/dia       | Topo de funil + SEO; o básico é comoditizado, não dá para cobrar                                               |
+| **Pro (individual)** | Histórico completo, filtros avançados/salvos, IA com limite alto, export CSV, (V1) alertas estatísticos | A dor real da persona-alvo está no cruzamento e na profundidade                                                |
+| **Creator/Analista** | Tudo do Pro + gráficos exportáveis com marca, relatórios pré-jogo gerados                               | Valor profissional direto (conteúdo citável)                                                                   |
+| **B2B (futuro)**     | API própria, white-label de widgets, relatórios para clubes/mídia                                       | Só com marca e dados validados; exige revisão de licença com o provedor (revenda de dados é cláusula sensível) |
 
 ## O que nunca fazer
 

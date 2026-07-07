@@ -8,6 +8,7 @@ desenvolvimento — aqui está a definição de fundação.
 ---
 
 ## SPEC-001 · Setup do projeto
+
 **Objetivo**: monorepo funcional com qualidade automatizada.
 **Escopo**: pnpm workspaces (`apps/web`, `apps/ingest`, `packages/{db,core,ai}`);
 TS estrito compartilhado; ESLint+Prettier; vitest; lefthook; Docker Compose
@@ -17,6 +18,7 @@ scripts `dev`, `dev:services`, `db:migrate`, `db:seed`, `test`.
 **CA**: clone→rodando em ≤ 5 comandos; CI verde obrigatória para merge.
 
 ## SPEC-002 · Autenticação
+
 **Objetivo**: contas com atrito mínimo.
 **Escopo**: Better Auth + Drizzle adapter; magic link + Google; sessão cookie
 httpOnly; middleware de proteção; RBAC user/admin; exclusão de conta (soft
@@ -27,6 +29,7 @@ delete + purga assíncrona em 30 dias).
 excluída não aparece em nenhuma query após purga.
 
 ## SPEC-003 · Modelagem inicial do banco
+
 **Objetivo**: schema core + proveniência do doc 05 migrado e testado.
 **Escopo**: tabelas core/ingest/app; índices; enums; seeds de referência
 (países, competições MVP); factories de teste.
@@ -40,6 +43,7 @@ direta. Funções Vercel em `gru1`, banco em São Paulo. Errar isso só aparece 
 produção — nasce certo aqui.
 
 ## SPEC-004 · Integração com provedor
+
 **Objetivo**: cliente tipado + normalizadores puros para o provedor escolhido.
 **Escopo**: client HTTP com rate limiter e retry; Zod na fronteira;
 normalizadores payload→{match,events,stats,lineups} como funções puras;
@@ -53,6 +57,7 @@ payload inválido → quality issue, nunca crash. **Dep**: 003.
 barato.
 
 ## SPEC-005 · Ingestão de partidas
+
 **Objetivo**: pipeline completo do doc 08.
 **Escopo**: BullMQ queues (live, batch); jobs discover_fixtures,
 live_window_scheduler, poll_live, consolidate, backfill; dedup por dedup_key;
@@ -63,6 +68,7 @@ mesmo snapshot = zero mudanças; kill do worker no meio do jogo → recuperaçã
 sem evento perdido após consolidação. **Dep**: 004, 017.
 
 ## SPEC-006 · Dashboard de jogos ao vivo
+
 **Objetivo**: home com jogos do dia (RF-02).
 **Escopo**: RSC + polling do cliente no endpoint live; MatchCard com estados;
 agrupamento por competição; filtro por competição; indicador de frescor.
@@ -70,6 +76,7 @@ agrupamento por competição; filtro por competição; indicador de frescor.
 implementados; LCP < 2,5 s mobile. **Dep**: 005, 018, 019.
 
 ## SPEC-007 · Página de partida
+
 **Objetivo**: RF-03 nos 3 estados (pré/live/pós).
 **Escopo**: placar, timeline ordenada com correções marcadas, stats com
 TrustBadge, escalações, H2H resumido, dados do árbitro; ISR + revalidateTag.
@@ -77,6 +84,7 @@ TrustBadge, escalações, H2H resumido, dados do árbitro; ISR + revalidateTag.
 estado "sem cobertura"; página consolidada exibe stats_locked_at. **Dep**: 005.
 
 ## SPEC-008 · Histórico e filtros
+
 **Objetivo**: RF-10 — busca e listagem filtrável de partidas.
 **Escopo**: busca por nome (pg_trgm + alias); filtros: competição, temporada,
 time, mando, resultado, árbitro, faixa de data; paginação; URL como estado
@@ -85,6 +93,7 @@ time, mando, resultado, árbitro, faixa de data; paginação; URL como estado
 URLs compartilháveis reproduzem a busca. **Dep**: 003, 009.
 
 ## SPEC-009 · Estatísticas agregadas
+
 **Objetivo**: camada analítica do doc 05.
 **Escopo**: MVs team_season/rolling/referee/stadium/standing/h2h; job
 refresh_aggregates disparado pela consolidação + cron noturno;
@@ -94,6 +103,7 @@ formula_version; computed_at em tudo.
 (teste automatizado). **Dep**: 005.
 
 ## SPEC-010 · Camada de IA
+
 **Objetivo**: chat do doc 09.
 **Escopo**: /api/chat streaming (AI SDK); 10–14 tools da tabela do doc 09;
 resposta estruturada com fontes; validação numérica de saída; rate limit por
@@ -104,6 +114,7 @@ de chat (mobile full, desktop painel).
 → recusa estruturada com alternativa. **Dep**: 009, 002.
 
 ## SPEC-011 · Auditoria e fontes
+
 **Objetivo**: rastreabilidade visível (RF-15).
 **Escopo**: TrustBadge component; tooltip fonte+timestamp; página "nossos
 dados"; audit_log escrito em toda correção; tela admin de audit por entidade.
@@ -111,6 +122,7 @@ dados"; audit_log escrito em toda correção; tela admin de audit por entidade.
 reconciliação aparece no audit e na UI. **Dep**: 003, 005.
 
 ## SPEC-012 · Observabilidade
+
 **Objetivo**: doc 07 §8.8 essencial.
 **Escopo**: Sentry (web+worker); pino→Axiom com request_id/job_id; Better
 Stack (uptime + heartbeat do worker); Bull Board no admin; alertas mínimos
@@ -119,6 +131,7 @@ Stack (uptime + heartbeat do worker); Bull Board no admin; alertas mínimos
 matar worker → alerta em ≤ 5 min. **Dep**: 001.
 
 ## SPEC-013 · Admin
+
 **Objetivo**: RF-18 mínimo.
 **Escopo**: /admin com role; lista de ingestion_jobs com re-run; fila de
 data_quality_issues com ações; saúde do provedor; botão reconciliar partida;
@@ -127,6 +140,7 @@ gestão de provider_entity_map (corrigir mapeamento errado).
 some da fila com resolução registrada. **Dep**: 005, 002.
 
 ## SPEC-014 · Billing (Fase 5)
+
 **Objetivo**: assinatura Pro.
 **Escopo**: Stripe Checkout + customer portal; webhook (assinado) de
 subscription; gates por plano (limites IA, filtros, export); página de preços.
@@ -134,12 +148,14 @@ subscription; gates por plano (limites IA, filtros, export); página de preços.
 → retry + alerta; nenhum gate depende só do cliente. **Dep**: 002, 010.
 
 ## SPEC-015 · Hardening de produção (Fase 6)
+
 **Objetivo**: robustez pós-validação.
 **Escopo**: rate limiting completo; security headers/CSP; testes de restore;
 canary de worker; runbooks de incidente; revisão de permissões; pentest leve.
 **CA**: checklist de segurança do doc 07 §8.10 completo e verificado.
 
 ## SPEC-016 · Ambientes e deploy
+
 **Objetivo**: doc 07 §8.3/8.5 operacional.
 **Escopo**: projetos Vercel/Railway/Supabase (dev e prod separados); preview
 por PR apontando para o banco dev com seeds idempotentes; pipeline de
@@ -149,6 +165,7 @@ secrets por ambiente.
 deploy; rollback testado uma vez de verdade. **Dep**: 001.
 
 ## SPEC-017 · Workers e filas
+
 **Objetivo**: fundação BullMQ do apps/ingest.
 **Escopo**: bootstrap do worker; filas live/batch com prioridades; retry/
 backoff padrão; DLQ + alerta; graceful shutdown (termina job atual);
@@ -157,6 +174,7 @@ schema_version em payloads; heartbeat.
 versão desconhecida vai à DLQ. **Dep**: 001.
 
 ## SPEC-018 · Sistema de cache
+
 **Objetivo**: camada Redis + estratégia ISR.
 **Escopo**: client Redis compartilhado; chaves versionadas (v1:live:{id});
 TTLs por tipo; helpers de invalidação por tag do Next; rate limiting
@@ -165,6 +183,7 @@ sliding-window; fallback Postgres quando Redis cai (degradar, não quebrar).
 computed_at presente em toda resposta cacheada. **Dep**: 001.
 
 ## SPEC-019 · Realtime updates
+
 **Objetivo**: entrega ao cliente (doc 08 passos 7–8).
 **Escopo**: GET /api/live/:matchId e /api/live/today com ETag/304 servidos do
 Redis; hook useLivePolling (10–20 s, pausa em aba oculta, "modo quente"
@@ -174,6 +193,7 @@ pós-gol); revalidateTag na escrita do worker.
 aparece em ≤ 60 s ponta a ponta. **Dep**: 005, 018.
 
 ## SPEC-020 · Data quality e reconciliação
+
 **Objetivo**: RF-19 + reconciliação do doc 08.
 **Escopo**: consolidate T+2h/T+24h com diff auditado; detectores: stats
 faltantes, evento órfão, valor suspeito (ex.: 30 escanteios), entidade não

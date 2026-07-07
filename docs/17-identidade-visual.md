@@ -33,39 +33,39 @@ regras a mais que as outras direções não exigiriam:
 
 Dark mode padrão (antracite quente); light mode derivado.
 
-| Token | Dark (padrão) | Light | Uso |
-|---|---|---|---|
-| `bg` | `#141110` | `#FAF7F2` | Fundo da página (antracite quente / papel) |
-| `surface` | `#1C1917` | `#FFFFFF` | Cards, tabelas |
-| `surface-2` | `#262019` | `#F1ECE3` | Hover, células alternadas, chips |
-| `border` | `#3A322A` | `#E0D8CC` | Bordas e divisores |
-| `text` | `#F0EBE4` | `#1C1917` | Texto principal |
-| `text-2` | `#A89F94` | `#57534E` | Texto secundário, labels |
-| `text-3` | `#6E665C` | `#A8A29E` | Muted, timestamps |
-| `primary` | `#FF6B35` | `#D9480F` | Marca (laranja queimado), links, botões, tabs |
-| `primary-hover` | `#FF8657` | `#B93A0A` | Estados hover/active |
-| `primary-subtle` | `#3B2114` | `#FFE8DC` | Fundos de destaque suave |
-| `on-primary` | `#401803` | `#FFFFFF` | Texto sobre a marca |
+| Token            | Dark (padrão) | Light     | Uso                                           |
+| ---------------- | ------------- | --------- | --------------------------------------------- |
+| `bg`             | `#141110`     | `#FAF7F2` | Fundo da página (antracite quente / papel)    |
+| `surface`        | `#1C1917`     | `#FFFFFF` | Cards, tabelas                                |
+| `surface-2`      | `#262019`     | `#F1ECE3` | Hover, células alternadas, chips              |
+| `border`         | `#3A322A`     | `#E0D8CC` | Bordas e divisores                            |
+| `text`           | `#F0EBE4`     | `#1C1917` | Texto principal                               |
+| `text-2`         | `#A89F94`     | `#57534E` | Texto secundário, labels                      |
+| `text-3`         | `#6E665C`     | `#A8A29E` | Muted, timestamps                             |
+| `primary`        | `#FF6B35`     | `#D9480F` | Marca (laranja queimado), links, botões, tabs |
+| `primary-hover`  | `#FF8657`     | `#B93A0A` | Estados hover/active                          |
+| `primary-subtle` | `#3B2114`     | `#FFE8DC` | Fundos de destaque suave                      |
+| `on-primary`     | `#401803`     | `#FFFFFF` | Texto sobre a marca                           |
 
 **Semânticas** (com codificação por forma obrigatória):
 
-| Token | Hex (dark) | Uso |
-|---|---|---|
-| `win` / `success` | `#2FBF71` | Vitória, confirmações |
-| `loss` / `danger` | `#E5484D` | Derrota, cartão vermelho, erros |
-| `draw` | `#A89F94` | Empate |
-| `card-yellow` | `#FFD60A` | Cartão amarelo — **só em chip formato cartão** |
-| `live` | `#FF4757` | Indicador pulsante de jogo ao vivo (dot + minuto) |
+| Token             | Hex (dark) | Uso                                               |
+| ----------------- | ---------- | ------------------------------------------------- |
+| `win` / `success` | `#2FBF71`  | Vitória, confirmações                             |
+| `loss` / `danger` | `#E5484D`  | Derrota, cartão vermelho, erros                   |
+| `draw`            | `#A89F94`  | Empate                                            |
+| `card-yellow`     | `#FFD60A`  | Cartão amarelo — **só em chip formato cartão**    |
+| `live`            | `#FF4757`  | Indicador pulsante de jogo ao vivo (dot + minuto) |
 
 **Badges de confiança** (doc 10 — TrustBadge; diferenciados por ícone + label,
 não só por cor):
 
-| Badge | Hex | Forma |
-|---|---|---|
-| ✓ confirmado | `#34D399` | pill verde |
-| ● provisório (ao vivo) | `#FBBF24` | pill âmbar com dot pulsante |
-| ƒ derivado | `#6CA0F5` | pill azul (tooltip com fórmula e amostra) |
-| ⚠ parcial | `#D97706` | pill outline tracejado com ícone ⚠ |
+| Badge                  | Hex       | Forma                                     |
+| ---------------------- | --------- | ----------------------------------------- |
+| ✓ confirmado           | `#34D399` | pill verde                                |
+| ● provisório (ao vivo) | `#FBBF24` | pill âmbar com dot pulsante               |
+| ƒ derivado             | `#6CA0F5` | pill azul (tooltip com fórmula e amostra) |
+| ⚠ parcial              | `#D97706` | pill outline tracejado com ícone ⚠        |
 
 **Tipografia** (parte da identidade C): serif de display para manchetes e
 números-herói (ex.: Fraunces/Playfair — validar licença), sans para UI (ex.:

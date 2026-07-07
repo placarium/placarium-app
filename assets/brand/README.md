@@ -24,4 +24,3 @@ assets/brand/
 
 Os SVGs sao os mestres editaveis. Para exportar PNG, use estes arquivos como
 fonte e mantenha os mesmos nomes base.
-

@@ -1,0 +1,32 @@
+{
+  "name": "placarium",
+  "private": true,
+  "packageManager": "pnpm@10.12.4",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "pnpm --parallel --filter './apps/*' dev",
+    "dev:web": "pnpm --filter @placarium/web dev",
+    "dev:ingest": "pnpm --filter @placarium/ingest dev",
+    "dev:services": "docker compose up -d",
+    "dev:services:down": "docker compose down",
+    "build": "pnpm -r build",
+    "test": "pnpm -r --filter !@placarium/e2e test",
+    "test:e2e": "pnpm --filter @placarium/e2e test",
+    "test:e2e:install": "pnpm --filter @placarium/e2e exec playwright install --with-deps chromium",
+    "lint": "pnpm -r lint",
+    "typecheck": "pnpm -r typecheck",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "db:generate": "pnpm --filter @placarium/db db:generate",
+    "db:migrate": "pnpm --filter @placarium/db db:migrate",
+    "db:seed": "pnpm --filter @placarium/db db:seed",
+    "db:studio": "pnpm --filter @placarium/db db:studio",
+    "prepare": "lefthook install"
+  },
+  "devDependencies": {
+    "lefthook": "^1.11.0",
+    "prettier": "^3.5.0"
+  }
+}

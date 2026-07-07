@@ -6,14 +6,14 @@ explícitas).
 
 ## Visão geral das camadas
 
-| Camada | Onde | Conteúdo |
-|---|---|---|
-| Operacional | Postgres (schema `core`) | Entidades, partidas, eventos, stats |
-| Proveniência | Postgres (`ingest`) | providers, jobs, raw_snapshots, quality issues, audit |
-| Analítica | Postgres (**materialized views**, schema `analytics`) | Agregados, standings, perfis. Warehouse dedicado só quando MVs não aguentarem (ver "Evolução") |
-| Cache | Redis | Estado ao vivo, respostas quentes, rate limit |
-| Busca | Postgres `pg_trgm` no MVP | Nomes de times/jogadores/árbitros. Busca dedicada (Typesense/Meili) só na V2 |
-| Usuário/IA | Postgres (`app`) | users, ai_queries, ai_answers |
+| Camada       | Onde                                                  | Conteúdo                                                                                       |
+| ------------ | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| Operacional  | Postgres (schema `core`)                              | Entidades, partidas, eventos, stats                                                            |
+| Proveniência | Postgres (`ingest`)                                   | providers, jobs, raw_snapshots, quality issues, audit                                          |
+| Analítica    | Postgres (**materialized views**, schema `analytics`) | Agregados, standings, perfis. Warehouse dedicado só quando MVs não aguentarem (ver "Evolução") |
+| Cache        | Redis                                                 | Estado ao vivo, respostas quentes, rate limit                                                  |
+| Busca        | Postgres `pg_trgm` no MVP                             | Nomes de times/jogadores/árbitros. Busca dedicada (Typesense/Meili) só na V2                   |
+| Usuário/IA   | Postgres (`app`)                                      | users, ai_queries, ai_answers                                                                  |
 
 **Não haverá event store dedicado no MVP**: `match_events` + `raw_snapshots`
 cumprem o papel (eventos são naturalmente um log). Kafka/event sourcing formal
@@ -138,17 +138,17 @@ consolidação (pós-jogo) + cron noturno de segurança. Na escala do MVP
 
 ## Desafios de modelagem e como o modelo responde
 
-| Desafio | Resposta no modelo |
-|---|---|
-| Nomes diferentes entre provedores | `provider_entity_map` + `entity_alias`; matching por chave do provedor, nunca por string |
-| Jogador transferido | `player_team_stint`; stats de partida apontam para (player, team) da data |
-| Temporadas com formatos diferentes | `season` + `stage` + `round` flexíveis; copas usam stages |
-| Partida adiada | `status=postponed` + novo `kickoff_at`; histórico no audit_log |
-| Evento corrigido depois | `is_corrected` + `superseded_by_event_id` + audit_log; UI marca |
-| Árbitro com dados incompletos | NULLs tolerados; perfil só é publicado com `matches >= 5` |
-| Estádio renomeado | nome atual + `entity_alias` com nomes históricos |
-| Stats divergentes entre fontes | 1 fonte no MVP; V2: `disputed` + fonte primária por categoria |
-| Cobertura parcial | `competition.coverage_level` orienta UI e IA |
+| Desafio                            | Resposta no modelo                                                                       |
+| ---------------------------------- | ---------------------------------------------------------------------------------------- |
+| Nomes diferentes entre provedores  | `provider_entity_map` + `entity_alias`; matching por chave do provedor, nunca por string |
+| Jogador transferido                | `player_team_stint`; stats de partida apontam para (player, team) da data                |
+| Temporadas com formatos diferentes | `season` + `stage` + `round` flexíveis; copas usam stages                                |
+| Partida adiada                     | `status=postponed` + novo `kickoff_at`; histórico no audit_log                           |
+| Evento corrigido depois            | `is_corrected` + `superseded_by_event_id` + audit_log; UI marca                          |
+| Árbitro com dados incompletos      | NULLs tolerados; perfil só é publicado com `matches >= 5`                                |
+| Estádio renomeado                  | nome atual + `entity_alias` com nomes históricos                                         |
+| Stats divergentes entre fontes     | 1 fonte no MVP; V2: `disputed` + fonte primária por categoria                            |
+| Cobertura parcial                  | `competition.coverage_level` orienta UI e IA                                             |
 
 ## Evolução da camada analítica
 
