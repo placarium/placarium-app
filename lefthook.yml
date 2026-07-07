@@ -3,8 +3,16 @@ pre-commit:
     biome:
       glob: "*.{ts,tsx,js,mjs,json,css}"
       run: pnpm exec biome check --no-errors-on-unmatched {staged_files}
+
+commit-msg:
+  commands:
+    commitlint:
+      run: pnpm exec commitlint --edit {1}
+
 pre-push:
   commands:
+    lint:
+      run: pnpm lint
     typecheck:
       run: pnpm typecheck
     test:

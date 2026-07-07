@@ -131,8 +131,14 @@ sem odds, sem scraping, sem previsões. Racional completo em `docs/`.
   spec nova com a sua anterior meio-pronta.
 - Sessões: retome com `/ctx-load`; sincronize com `/ctx-sync` ao pausar.
 - Gestão do projeto: **Plane** (externo). Não usar Linear.
-- Agentes (`.agents/`): `pr-manager` (preparar/revisar PRs) ·
-  `db-migrations` (todo schema) · `e2e-tester` (E2E + agent-browser).
+- Agentes (`.agents/`): `pr-manager` (ciclo de PR) · `db-migrations` (todo
+  schema) · `e2e-tester` (suíte Playwright) · `browser-qa` (validação
+  interativa via agent-browser: navega/autentica/screenshota como usuário).
+- **Quality gates em 3 camadas**: commit (Biome nos staged + commitlint
+  conventional) → push (lint + typecheck + testes completos) → PR (CI +
+  CodeRabbit). Burlar gate (`--no-verify`) é proibido.
+- Componente compartilhado em `components/` ganha **story no Storybook**
+  (`pnpm storybook`, porta 6006) — documentação viva do design system.
 - **Envs**: um único `.env` na raiz (symlinks criados por `pnpm setup:env`);
   cada app valida com `env.ts` (Zod) no boot. Preview/prod vivem SÓ nos
   painéis Vercel/Railway — arquivos `.env.dev`/`.env.prod` são proibidos.

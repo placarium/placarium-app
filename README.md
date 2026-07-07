@@ -31,7 +31,7 @@ vem de ferramentas que consultam dados rastreáveis.
 | ORM/migrations | Drizzle + drizzle-kit |
 | Auth | Better Auth |
 | IA | Vercel AI SDK, tools fechadas com Zod (modelo escolhido por evals) |
-| Qualidade | Biome (lint+format) · vitest · Playwright · lefthook · CodeRabbit |
+| Qualidade | Biome (lint+format) · vitest · Playwright · Storybook · lefthook + commitlint · CodeRabbit |
 | Observabilidade | Sentry (erros) · pino→Axiom (logs) · Better Stack (uptime) |
 
 ## Estrutura de pastas
@@ -130,23 +130,31 @@ Conflito com outro projeto? Ajuste no seu `.env` — não edite o
 | `pnpm test:e2e` | Playwright (1ª vez: `pnpm test:e2e:install`) |
 | `pnpm lint` / `lint:fix` / `format` | Biome |
 | `pnpm typecheck` | tsc em todos os pacotes |
+| `pnpm storybook` | Storybook do design system (porta 6006) |
 | `pnpm db:generate` / `db:migrate` / `db:seed` / `db:studio` | banco (Drizzle) |
 
 Utilitários avulsos moram em [scripts/](scripts/README.md).
 
 ## Qualidade e fluxo de contribuição
 
-- **Main só via PR** com CI verde (Biome → typecheck → vitest → build).
-  Review humano opcional; **CodeRabbit revisa toda PR** (config em
-  [.coderabbit.yaml](.coderabbit.yaml)) e todo comentário é tratado — fix ou
-  resposta, nunca silêncio.
+**Quality gates em 3 camadas** (lefthook local + CI; burlar com `--no-verify`
+é proibido):
+
+| Momento | Gate | Valida |
+| --- | --- | --- |
+| `git commit` | Biome nos staged + **commitlint** | formatação/lint dos arquivos tocados; mensagem no padrão conventional (`tipo: descrição`) |
+| `git push` | lint completo + typecheck + testes | Biome no repo todo · tsc em todos os pacotes · vitest |
+| Pull Request | CI + CodeRabbit | `biome ci` → typecheck → vitest → build; review automático ([.coderabbit.yaml](.coderabbit.yaml)) com todo comentário tratado |
+
+- **Main só via PR** com CI verde; review humano opcional.
 - Branch `tipo/spec-XXX-slug` · squash merge · commits em português
-  explicando o porquê.
-- **Testes sempre**: feature sem teste não entra.
-- Hooks (lefthook): Biome no pre-commit; typecheck + test no pre-push.
+  (conventional: `feat|fix|chore|docs|refactor|test: ...`).
+- **Testes sempre**: feature sem teste não entra. Componente compartilhado
+  ganha **story no Storybook** (`pnpm storybook`).
 - Agentes de IA (`.agents/`, symlink `.claude/agents`): `pr-manager` (ciclo
-  completo de PR) · `db-migrations` (qualquer schema) · `e2e-tester`
-  (Playwright + exploração via agent-browser).
+  completo de PR) · `db-migrations` (qualquer schema) · `e2e-tester` (suíte
+  Playwright) · `browser-qa` (validação interativa via agent-browser —
+  navega, autentica e screenshota como um usuário real).
 
 ## Ferramentas do time (MCPs)
 

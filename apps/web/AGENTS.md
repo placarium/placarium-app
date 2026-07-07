@@ -60,8 +60,15 @@ componente só "sobe" para `components/` no segundo uso; **não existe
 - ❌ Componente genérico "configurável" antes do terceiro caso de uso
 - ✅ `revalidateTag` na escrita; ❌ `router.refresh()` como muleta de cache
 
+## Storybook
+
+Todo componente compartilhado (`components/`) ganha uma story colocada ao
+lado dele (`*.stories.tsx`) — é a documentação viva do design system.
+`pnpm storybook` (porta 6006). A story de tokens (`stories/foundations-cores`)
+é o único lugar da UI onde hex aparece "cru" — e vem do JSON canônico.
+
 ## Testes
 
 Lógica visual pura (formatadores, mapeamentos) → vitest aqui. Jornadas → e2e/
-(agente `e2e-tester`). Se um componente ficou difícil de testar, ele está
-grande demais — divida.
+(agente `e2e-tester`); validação interativa de aceite → agente `browser-qa`.
+Se um componente ficou difícil de testar, ele está grande demais — divida.

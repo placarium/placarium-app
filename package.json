@@ -25,10 +25,13 @@
     "db:studio": "pnpm --filter @placarium/db db:studio",
     "prepare": "lefthook install",
     "lint:fix": "biome check --write .",
-    "setup:env": "node scripts/setup-env.mjs"
+    "setup:env": "node scripts/setup-env.mjs",
+    "storybook": "pnpm --filter @placarium/web storybook"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.2",
+    "@commitlint/cli": "^21.2.0",
+    "@commitlint/config-conventional": "^21.2.0",
     "lefthook": "^1.11.0"
   }
 }
