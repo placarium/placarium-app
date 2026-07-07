@@ -40,6 +40,7 @@ desenvolvimento. Comece por [docs/16-recomendacoes-e-proximas-acoes.md](docs/16-
 | [15](docs/15-riscos-e-tradeoffs.md) | Matriz de riscos e trade-offs |
 | [16](docs/16-recomendacoes-e-proximas-acoes.md) | Recomendação objetiva e plano dos próximos 7 dias |
 | [17](docs/17-identidade-visual.md) | Identidade visual: paleta de cores e tokens |
+| [18](docs/18-provedores-pricing-e-orcamento.md) | Provedores: pricing, demanda estimada e orçamento do MVP |
 
 ## Decisões de fundação (resumo)
 
