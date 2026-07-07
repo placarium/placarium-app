@@ -91,7 +91,7 @@ Racional completo em `docs/` — consulte antes de propor mudança.
 | `pnpm dev:services`                            | Postgres + Redis locais (docker compose) |
 | `pnpm test` / `pnpm test:e2e`                  | vitest (rápido) / Playwright (jornadas)  |
 | `pnpm lint` · `pnpm typecheck` · `pnpm format` | qualidade                                |
-| `pnpm db:generate                              | migrate                                  | seed | studio` | banco (via agente `db-migrations`) |
+| `pnpm db:generate` etc. (`db:*`)               | banco (via agente `db-migrations`)       |
 
 ## Fluxo de trabalho
 
