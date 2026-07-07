@@ -75,6 +75,21 @@ apenas números presentes em `rows`; inclua `meta` na resposta; se
 Regras: máx. 5 tool calls por pergunta; timeout 10 s por tool; resultados
 truncados a N linhas com aviso explícito de truncamento.
 
+## Crescimento do catálogo — híbrido progressivo (decisão 2026-07-06)
+
+O catálogo **nasce fechado e cresce guiado por demanda real**:
+
+1. Toda pergunta que a IA recusa por falta de tool é logada em `ai_query`
+   com `intent` classificado (`unanswerable_no_tool`).
+2. Relatório semanal agrupa as recusas por intenção → as mais frequentes
+   viram candidatas a nova tool (escrita, revisada e testada como as demais).
+3. A resposta de recusa informa o usuário: "ainda não tenho essa consulta —
+   ela foi registrada para priorização".
+4. **NL→SQL não entra no MVP/V1.** Só na V2, se a fila de recusas justificar,
+   como modo *experimental* explicitamente marcado, sandboxed (usuário
+   Postgres read-only, allowlist de tabelas, validação de AST, timeout curto)
+   e nunca como caminho padrão — a promessa "nunca inventa" tem precedência.
+
 ## Anti-alucinação e validação
 
 1. **Prompt de sistema**: "Você só afirma números presentes nos resultados
