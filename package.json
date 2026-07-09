@@ -23,7 +23,7 @@
     "db:migrate": "pnpm --filter @placarium/db db:migrate",
     "db:seed": "pnpm --filter @placarium/db db:seed",
     "db:studio": "pnpm --filter @placarium/db db:studio",
-    "prepare": "lefthook install",
+    "prepare": "lefthook install || true",
     "lint:fix": "biome check --write .",
     "setup:env": "node scripts/setup-env.mjs",
     "storybook": "pnpm --filter @placarium/web storybook"
