@@ -18,7 +18,7 @@ vem de ferramentas que consultam dados rastreáveis.
 | Decisões, specs e riscos | [docs/](docs/README.md) |
 | Marca e design system | [DESIGN.md](DESIGN.md) + [assets/brand/](assets/brand/) |
 | Regras para humanos e IAs | [AGENTS.md](AGENTS.md) (canônico; `CLAUDE.md` é symlink) |
-| Gestão do projeto | Plane (via MCP — ver [§Ferramentas do time](#ferramentas-do-time-mcps)) |
+| Gestão do projeto | Linear (via MCP — ver [§Ferramentas do time](#ferramentas-do-time-mcps)) |
 
 ## Stack
 
@@ -160,25 +160,25 @@ Utilitários avulsos moram em [scripts/](scripts/README.md).
 
 Dois MCPs fazem parte do fluxo oficial e devem ser configurados por cada dev:
 
-### Plane (gestão do projeto)
+### Linear (gestão do projeto)
 
-Work items, cycles e módulos do Placarium vivem no Plane. Setup no Claude
-Code (servidor hospedado, OAuth no navegador na primeira chamada):
+Issues, cycles e projetos do Placarium vivem no workspace **Placarium** do
+Linear. Setup no Claude Code (servidor hospedado, OAuth no navegador na
+primeira chamada — escolha o workspace Placarium ao autenticar):
 
 ```bash
-claude mcp add --transport http plane https://mcp.plane.so/http/mcp
+claude mcp add --transport http linear-server-placarium https://mcp.linear.app/mcp
 ```
 
-Alternativa com token (fluxos automatizados): gere um token em *Workspace
-Settings → Access Tokens* e use `claude mcp add-json` com a URL
-`https://mcp.plane.so/http/api-key/mcp` e headers `x-api-key` +
-`x-workspace-slug` (doc oficial: developers.plane.so/dev-tools/mcp-server).
-Verifique com `claude mcp list` ou `/mcp` dentro da sessão.
+⚠️ Quem também usa Linear em outro projeto (outro workspace): o nome do
+servidor MCP identifica a autenticação — use um nome por workspace (ex.:
+`linear-server-placarium`) para não misturar as contas. Verifique com
+`claude mcp list` ou `/mcp` dentro da sessão.
 
 ### Pencil (design de UI)
 
 As UIs nascem como arquivos **`.pen`** em [design/](design/README.md),
-versionados no repo e **anexados ao work item correspondente no Plane**.
+versionados no repo e **anexados à issue correspondente no Linear**.
 Setup: instale o app do [pencil.dev](https://docs.pencil.dev/getting-started/ai-integration)
 — o MCP é configurado automaticamente na instalação; confirme com `/mcp`
 (deve listar `pencil` como conectado). Regras: `.pen` só é lido/editado via
@@ -197,5 +197,5 @@ MCP (nunca como texto), e o fluxo design→código usa os tokens de
 
 Checklist de contas (uma vez, pelo time): Vercel · Railway · Supabase
 (dev+prod) · Sentry · Axiom · Better Stack · app do CodeRabbit na org ·
-Plane workspace. Estratégia completa de ambientes:
+Linear workspace. Estratégia completa de ambientes:
 [docs/07 §8.3](docs/07-system-design-e-infra.md).

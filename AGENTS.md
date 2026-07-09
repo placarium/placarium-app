@@ -130,7 +130,7 @@ sem odds, sem scraping, sem previsões. Racional completo em `docs/`.
 - **Uma spec por dev por vez**, na ordem de `docs/13-specs.md`. Não comece
   spec nova com a sua anterior meio-pronta.
 - Sessões: retome com `/ctx-load`; sincronize com `/ctx-sync` ao pausar.
-- Gestão do projeto: **Plane** (externo). Não usar Linear.
+- Gestão do projeto: **Linear** (workspace Placarium, externo).
 - Agentes (`.agents/`): `pr-manager` (ciclo de PR) · `db-migrations` (todo
   schema) · `e2e-tester` (suíte Playwright) · `browser-qa` (validação
   interativa via agent-browser: navega/autentica/screenshota como usuário).
@@ -143,7 +143,7 @@ sem odds, sem scraping, sem previsões. Racional completo em `docs/`.
   cada app valida com `env.ts` (Zod) no boot. Preview/prod vivem SÓ nos
   painéis Vercel/Railway — arquivos `.env.dev`/`.env.prod` são proibidos.
 - **Design & PM**: UIs nascem no **Pencil** (arquivos `.pen` em `design/`,
-  versionados) e são anexadas aos work items do **Plane**. Ambos conectados
+  versionados) e são anexadas às issues do **Linear**. Ambos conectados
   por MCP — setup no README §Ferramentas do time.
 - Commits em português explicando o porquê; nunca commitar `.env`.
 - Chave real de provedor só em produção; dev/CI usam `FOOTBALL_PROVIDER=mock`.

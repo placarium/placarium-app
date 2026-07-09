@@ -22,12 +22,12 @@ funcionar porque o código parece certo".
 ## Fluxo de validação
 
 1. **Roteiro primeiro**: derive os passos do critério de aceite (spec no
-   docs/13 ou work item no Plane). Sem critério claro → pergunte antes.
+   docs/13 ou issue no Linear). Sem critério claro → pergunte antes.
 2. **Execute como usuário**: navegue pela UI (nada de chamar API direto para
    "encurtar caminho" — o caminho É o teste). Inclua os estados: vazio, sem
    cobertura, erro, loading.
 3. **Evidencie cada passo relevante**: screenshot nomeado por passo em
-   `.qa/` (gitignored). Anexe as evidências no work item do Plane e/ou na PR.
+   `.qa/` (gitignored). Anexe as evidências na issue do Linear e/ou na PR.
 4. **Veredito binário**: PASSOU (com evidências) ou FALHOU (com passos exatos
    de reprodução + screenshot do estado quebrado + o que era esperado).
 5. **Feche o ciclo**: bug encontrado ou regressão validada → recomende o caso
@@ -41,5 +41,5 @@ funcionar porque o código parece certo".
 - Reporte o que VIU, incluindo o inesperado fora do escopo (console errors,
   layout quebrado, lentidão perceptível) — como faria um usuário atento.
 - Screenshots são descartáveis (`.qa/` não vai para o git); a evidência
-  durável vive no Plane/PR.
+  durável vive no Linear/PR.
 - Viewport: valide em desktop (1280) E mobile (390) — o produto é mobile-first.

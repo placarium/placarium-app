@@ -7,8 +7,8 @@ do código: commit, branch e review de design como qualquer arquivo.
 
 - Um `.pen` por área grande (ex.: `partida.pen`, `dashboard.pen`) — evita
   arquivo monolítico e conflito de merge entre você e o Isaque.
-- Design novo/alterado é **anexado ao work item correspondente no Plane** —
-  o item conta a história completa (o quê + como vai parecer).
+- Design novo/alterado é **anexado à issue correspondente no Linear** —
+  a issue conta a história completa (o quê + como vai parecer).
 - Tokens de cor/tipografia seguem `DESIGN.md` e `assets/brand/tokens/` — o
   Pencil consome os mesmos valores, nunca inventa hex novo.
 - `.pen` é lido/editado **via MCP do Pencil** (nunca com editores de texto).
