@@ -31,7 +31,7 @@ vem de ferramentas que consultam dados rastreáveis.
 | ORM/migrations | Drizzle + drizzle-kit |
 | Auth | Better Auth |
 | IA | Vercel AI SDK, tools fechadas com Zod (modelo escolhido por evals) |
-| Qualidade | Biome (lint+format) · vitest · Playwright · Storybook · lefthook + commitlint · CodeRabbit |
+| Qualidade | Biome (lint+format) · vitest (unit/integração) · Storybook · lefthook + commitlint · CodeRabbit |
 | Observabilidade | Sentry (erros) · pino→Axiom (logs) · Better Stack (uptime) |
 
 ## Estrutura de pastas
@@ -45,7 +45,6 @@ placarium-app/
 │   ├── core/                 #   domínio puro: tipos, Zod, normalizadores, fixtures — ZERO I/O
 │   ├── db/                   #   Drizzle: schema, migrations, clients, queries compartilhadas
 │   └── ai/                   #   tools da IA, prompts, evals (golden set)
-├── e2e/                      # Playwright: jornadas de usuário
 ├── scripts/                  # ferramental operacional (setup, gravação de fixtures)
 ├── design/                   # arquivos .pen do Pencil — UIs versionadas
 ├── docs/                     # fundação: decisões, specs 001–020, riscos
@@ -126,8 +125,7 @@ Conflito com outro projeto? Ajuste no seu `.env` — não edite o
 | `pnpm dev` / `dev:web` / `dev:ingest` | apps em watch (juntos ou separados) |
 | `pnpm dev:services` / `dev:services:down` | sobe/derruba Postgres + Redis |
 | `pnpm setup:env` | `.env` raiz + symlinks (idempotente) |
-| `pnpm test` | unit/integração (vitest — rápido, roda no pre-push) |
-| `pnpm test:e2e` | Playwright (1ª vez: `pnpm test:e2e:install`) |
+| `pnpm test` | unit/integração (vitest — roda no pre-push) |
 | `pnpm lint` / `lint:fix` / `format` | Biome |
 | `pnpm typecheck` | tsc em todos os pacotes |
 | `pnpm storybook` | Storybook do design system (porta 6006) |
@@ -149,12 +147,15 @@ Utilitários avulsos moram em [scripts/](scripts/README.md).
 - **Main só via PR** com CI verde; review humano opcional.
 - Branch `tipo/spec-XXX-slug` · squash merge · commits em português
   (conventional: `feat|fix|chore|docs|refactor|test: ...`).
-- **Testes sempre**: feature sem teste não entra. Componente compartilhado
-  ganha **story no Storybook** (`pnpm storybook`).
+- **Testes sempre — unit e integração, nunca E2E**: feature sem teste não
+  entra, mas a cobertura para na integração (vitest). Jornada de usuário se
+  valida no navegador com o agente `browser-qa`, durante o desenvolvimento —
+  suíte E2E é proibida (custo e fragilidade não se pagam nesta escala).
+  Componente compartilhado ganha **story no Storybook** (`pnpm storybook`).
 - Agentes de IA (`.agents/`, symlink `.claude/agents`): `pr-manager` (ciclo
-  completo de PR) · `db-migrations` (qualquer schema) · `e2e-tester` (suíte
-  Playwright) · `browser-qa` (validação interativa via agent-browser —
-  navega, autentica e screenshota como um usuário real).
+  completo de PR) · `db-migrations` (qualquer schema) · `browser-qa`
+  (validação interativa via agent-browser — navega, autentica e screenshota
+  como um usuário real).
 
 ## Ferramentas do time (MCPs)
 

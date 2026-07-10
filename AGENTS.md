@@ -22,9 +22,12 @@ O time (Luis + Isaque) usa ferramentas de IA diferentes. Para consistência:
 1. **Proveniência é lei.** Toda tabela de fato carrega `source_provider_id`,
    `source_fetched_at`, `confidence` NOT NULL. Agregados são sempre derivados
    e recalculáveis — nunca editados à mão.
-2. **Testes sempre.** Feature sem teste não entra. Unit/integration com
-   vitest; E2E com Playwright (agente `e2e-tester`). Normalizadores são
-   funções puras 100% cobertas por fixtures reais.
+2. **Testes sempre — unit e integração, nunca E2E.** Feature sem teste não
+   entra. Cobertura vai até integração, com vitest; **suíte E2E é proibida**
+   (custo e fragilidade não se pagam nesta escala). Jornada de usuário é
+   validada pelo dev + IA no navegador via `agent-browser` (agente
+   `browser-qa`) durante o desenvolvimento. Normalizadores são funções puras
+   100% cobertas por fixtures reais.
 3. **Simplicidade deliberada.** Nada de abstração antes do terceiro uso, nem
    helper para operação única, nem tratamento de erro para cenário
    impossível. Validação só nas fronteiras (payload externo, input de
@@ -50,7 +53,6 @@ placarium-app/
 │   ├── core/         # Domínio puro: tipos, Zod, normalizadores, fixtures. ZERO I/O
 │   ├── db/           # Drizzle: schema, migrations, client, queries compartilhadas
 │   └── ai/           # Tools da IA, camada semântica, prompts, golden set/evals
-├── e2e/              # Playwright: jornadas de usuário (agente e2e-tester)
 ├── scripts/          # Ferramental operacional — NÃO é código de produto (ver scripts/README.md)
 ├── design/           # Arquivos .pen (Pencil): UIs versionadas junto do código
 ├── docs/             # Fundação: decisões, specs 001–020, riscos (ver docs/README.md)
@@ -100,7 +102,6 @@ IA: /api/chat → tools de packages/ai (queries fechadas) → resposta com fonte
 | `packages/core` | Domínio puro e fixtures canônicas         | Fazer I/O; depender de outro package                             |
 | `packages/db`   | Schema, migrations, acesso a dados        | Ser alterado sem o agente `db-migrations`                        |
 | `packages/ai`   | Tools, prompts, evals da IA               | Executar SQL livre; responder sem proveniência                   |
-| `e2e`           | Jornadas de usuário no Playwright         | Usar chave real de provedor; depender de ordem de execução       |
 
 ## Decisões travadas (não reabrir sem o fundador)
 
@@ -116,7 +117,7 @@ sem odds, sem scraping, sem previsões. Racional completo em `docs/`.
 | ------------------------------------ | ---------------------------------------- |
 | `pnpm dev`                           | web + ingest em watch                    |
 | `pnpm dev:services`                  | Postgres + Redis locais (docker compose) |
-| `pnpm test` / `pnpm test:e2e`        | vitest (rápido) / Playwright (jornadas)  |
+| `pnpm test`                          | vitest (unit + integração)               |
 | `pnpm lint` / `pnpm lint:fix`        | Biome check (sem/com autofix)            |
 | `pnpm format` · `pnpm typecheck`     | Biome format · tsc                       |
 | `pnpm db:generate` etc. (`db:*`)     | banco (via agente `db-migrations`)       |
@@ -127,13 +128,14 @@ sem odds, sem scraping, sem previsões. Racional completo em `docs/`.
   (ex.: `feat/spec-003-schema-core`), CI verde obrigatória, review humano
   opcional (recomendado), **CodeRabbit revisa toda PR** — comentários são
   tratados (fix ou resposta), nunca ignorados. Use o agente `pr-manager`.
-- **Uma spec por dev por vez**, na ordem de `docs/13-specs.md`. Não comece
-  spec nova com a sua anterior meio-pronta.
+- Specs seguem a ordem de `docs/13-specs.md`. O dev pode tocar mais de uma
+  issue/spec ao mesmo tempo — o que não vale é deixar spec meio-pronta
+  parada por tempo indefinido.
 - Sessões: retome com `/ctx-load`; sincronize com `/ctx-sync` ao pausar.
 - Gestão do projeto: **Linear** (workspace Placarium, externo).
 - Agentes (`.agents/`): `pr-manager` (ciclo de PR) · `db-migrations` (todo
-  schema) · `e2e-tester` (suíte Playwright) · `browser-qa` (validação
-  interativa via agent-browser: navega/autentica/screenshota como usuário).
+  schema) · `browser-qa` (validação interativa via agent-browser:
+  navega/autentica/screenshota como usuário — substitui a suíte E2E).
 - **Quality gates em 3 camadas**: commit (Biome nos staged + commitlint
   conventional) → push (lint + typecheck + testes completos) → PR (CI +
   CodeRabbit). Burlar gate (`--no-verify`) é proibido.

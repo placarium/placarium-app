@@ -69,6 +69,7 @@ lado dele (`*.stories.tsx`) — é a documentação viva do design system.
 
 ## Testes
 
-Lógica visual pura (formatadores, mapeamentos) → vitest aqui. Jornadas → e2e/
-(agente `e2e-tester`); validação interativa de aceite → agente `browser-qa`.
+Lógica visual pura (formatadores, mapeamentos) → vitest aqui. **Não escreva
+suíte E2E** — jornada de usuário e critério de aceite se validam no navegador
+com o agente `browser-qa` (agent-browser) durante o desenvolvimento.
 Se um componente ficou difícil de testar, ele está grande demais — divida.
