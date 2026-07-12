@@ -108,7 +108,7 @@ Brasil"_. Tudo que não testa essa tese fica fora.
 | Estatísticas agregadas materializadas (médias de gols, cartões, escanteios por time/árbitro/estádio) | É o diferencial; derivável dos eventos que já ingerimos                     |
 | **IA conversacional com 8–12 tools fechadas**                                                        | Escopo controlado; sem SQL livre                                            |
 | Badge de origem/timestamp/confiança em todo dado                                                     | Diferencial nº 1; barato se nascer no modelo de dados                       |
-| Auth simples (magic link + Google)                                                                   | Necessária para limitar custo de IA por usuário                             |
+| Auth simples (Email OTP + Google), sem senha                                                         | Necessária para limitar custo de IA por usuário                             |
 | Admin mínimo: status de ingestão + fila de data quality                                              | Sem isso, operar às cegas                                                   |
 | Observabilidade essencial: Sentry, logs estruturados, uptime                                         | Custo baixo, evita voar às cegas                                            |
 

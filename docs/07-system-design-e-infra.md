@@ -56,7 +56,7 @@ Redis → Claude → usuário, com log em `ai_answer`.
 | -------------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------- | ----------------------- | ------------------------------------------------------------- |
 | **Local**            | Dev diário      | Docker Compose: Postgres + Redis; web e worker via pnpm                                                                                                | Seed sintético + fixtures de partidas reais gravadas | Chave dev com cap baixo | **Mock server** (fixtures) por padrão; chave real só sob flag |
 | **Preview** (por PR) | Revisar feature | Vercel preview + **banco de dev compartilhado** (projeto Supabase separado do prod, seeds idempotentes); Redis compartilhado de dev com prefixo por PR | Seed sintético                                       | Chave dev               | Mock                                                          |
-| **Produção**         | Usuários reais  | Vercel prod + Railway prod + Neon main                                                                                                                 | Reais                                                | Chave prod com caps     | Chave real (a única que polla de verdade)                     |
+| **Produção**         | Usuários reais  | Vercel prod + Railway prod + Supabase prod                                                                                                             | Reais                                                | Chave prod com caps     | Chave real (a única que polla de verdade)                     |
 
 **Staging dedicado: adiado deliberadamente.** Com um dev, preview-por-PR sobre
 um banco de dev compartilhado cobre a maior parte do valor de staging sem o
@@ -93,8 +93,8 @@ pnpm test                     # vitest
   (1 rodada) como JSON em `packages/core/fixtures/` — alimentam o mock server,
   os testes de normalização e o seed. É o ativo de teste mais valioso do
   projeto.
-- Qualidade: ESLint + Prettier + typecheck estrito; hooks via lefthook
-  (pre-commit: lint-staged; pre-push: typecheck+test).
+- Qualidade: Biome (lint+format) + typecheck estrito; hooks via lefthook
+  (pre-commit: Biome nos staged + commitlint; pre-push: lint+typecheck+test).
 - Onboarding: este repositório de docs + `CONTRIBUTING.md` com o bloco acima.
 
 ## 8.5 Estratégia de deploy
@@ -206,7 +206,7 @@ custo IA diário > teto, migration falhou.
 | -------------------------------- | --------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------- |
 | MVP (≤ 1 k users)                | Nenhum técnico; foco em produto   | Stack deste doc                                                                                                     | Warehouse, k8s, multi-região, microserviços |
 | Dados reais + primeiros usuários | Rate limit do provedor            | Polling adaptativo, priorização de partidas (doc 08)                                                                | Segundo provedor                            |
-| Primeira versão pública          | Picos em rodada                   | ISR agressivo, tuning de índices, réplicas de leitura Neon                                                          | Reescrever em Go 🙂                         |
+| Primeira versão pública          | Picos em rodada                   | ISR agressivo, tuning de índices, réplica de leitura (Supabase)                                                     | Reescrever em Go 🙂                         |
 | + campeonatos                    | Custo provedor + refresh de MVs   | Upgrade de plano do provedor; MVs incrementais ou por competição                                                    | ClickHouse por reflexo                      |
 | + usuários simultâneos           | Conexões SSE/polling              | SSE no worker → pub/sub gerenciado                                                                                  | Infra própria de websocket                  |
 | + analytics avançado             | Queries analíticas no operacional | Réplica de leitura dedicada a analytics → DuckDB/ClickHouse se doer                                                 | —                                           |
@@ -227,5 +227,5 @@ de plano) deixou de resolver **duas vezes seguidas** no mesmo gargalo.
 | CI/CD         | GitHub Actions + deploys nativos              | idem + smoke tests ricos                          | + canary                                                                                                                          |
 | Secrets       | Cofres Vercel/Railway                         | idem + rotação formal                             | Vault/SSM                                                                                                                         |
 | Monitoramento | Sentry+Axiom+Better Stack                     | + OTel/Grafana                                    | + on-call formal                                                                                                                  |
-| Backups       | Neon PITR + dump semanal externo              | + restore testado trimestral                      | + DR multi-região                                                                                                                 |
+| Backups       | Supabase PITR + dump semanal externo          | + restore testado trimestral                      | + DR multi-região                                                                                                                 |
 | Deploy seguro | expand-contract + smoke + rollback 1-clique   | + canary de worker                                | + blue/green                                                                                                                      |

@@ -28,7 +28,7 @@ Impacto/Probabilidade: A(lto) M(édio) B(aixo).
    streaming. Meta de produto, não limitação técnica disfarçada.
 3. **Postgres para tudo vs. stack especializada**: aceito MVs "artesanais"
    para operar um único banco. Gatilhos de saída documentados (doc 05).
-4. **Vercel+Railway+Neon vs. cloud única**: aceito 3 dashboards para ter o
-   melhor de cada camada com DX máxima. Consolidação é decisão de escala.
+4. **Vercel+Railway+Supabase vs. cloud única**: aceito 3 dashboards para ter
+   o melhor de cada camada com DX máxima. Consolidação é decisão de escala.
 5. **IA com tools fechadas vs. NL→SQL**: aceito cobrir menos perguntas em
    troca de zero alucinação. O catálogo cresce guiado pela demanda logada.

@@ -53,7 +53,7 @@ nosso; medi-lo separado (`provider_lag` vs `pipeline_lag`) desde o MVP.
 | Item                          | MVP                                            | Regra                                           |
 | ----------------------------- | ---------------------------------------------- | ----------------------------------------------- |
 | Provedor de dados             | teto mensal definido na Fase 0                 | alertar a 80 % do rate limit                    |
-| Infra (Vercel+Railway+Neon)   | teto mensal baixo, revisado por mês            | alerta de billing em cada plataforma            |
+| Infra (Vercel+Railway+Supabase) | teto mensal baixo, revisado por mês          | alerta de billing em cada plataforma            |
 | IA                            | custo por pergunta monitorado; hard cap mensal | free: 10 perguntas/dia; corte automático no cap |
 | Custo total por usuário ativo | métrica acompanhada desde o MVP                | define preço do plano pago                      |
 

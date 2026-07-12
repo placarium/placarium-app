@@ -11,7 +11,7 @@ desenvolvimento — aqui está a definição de fundação.
 
 **Objetivo**: monorepo funcional com qualidade automatizada.
 **Escopo**: pnpm workspaces (`apps/web`, `apps/ingest`, `packages/{db,core,ai}`);
-TS estrito compartilhado; ESLint+Prettier; vitest; lefthook; Docker Compose
+TS estrito compartilhado; Biome (lint+format); vitest; lefthook; Docker Compose
 (postgres+redis); `.env.example`; GitHub Actions (lint+typecheck+test+build);
 scripts `dev`, `dev:services`, `db:migrate`, `db:seed`, `test`.
 **Fora**: qualquer feature de produto.
@@ -19,14 +19,17 @@ scripts `dev`, `dev:services`, `db:migrate`, `db:seed`, `test`.
 
 ## SPEC-002 · Autenticação
 
-**Objetivo**: contas com atrito mínimo.
-**Escopo**: Better Auth + Drizzle adapter; magic link + Google; sessão cookie
-httpOnly; middleware de proteção; RBAC user/admin; exclusão de conta (soft
-delete + purga assíncrona em 30 dias).
-**Fora**: planos/billing, 2FA de usuário final.
+**Objetivo**: contas com atrito mínimo, sem senha.
+**Escopo**: Better Auth + Drizzle adapter; **Email OTP** (plugin `emailOTP`) +
+Google OAuth; sessão cookie httpOnly; middleware de proteção; RBAC user/admin;
+exclusão de conta (soft delete + purga assíncrona em 30 dias). Envio de
+e-mail: Mailpit (docker-compose) em dev/teste; Resend em produção.
+**Fora**: senha, magic link (descartado 2026-07-09: quebra em in-app browser
+mobile e é invalidado por scanners de link), planos/billing, 2FA de usuário
+final.
 **Entidades**: user, session, account. **Dep**: 001.
-**CA**: login por e-mail e Google; rota admin bloqueada para user; conta
-excluída não aparece em nenhuma query após purga.
+**CA**: login por código OTP no e-mail e por Google; rota admin bloqueada
+para user; conta excluída não aparece em nenhuma query após purga.
 
 ## SPEC-003 · Modelagem inicial do banco
 

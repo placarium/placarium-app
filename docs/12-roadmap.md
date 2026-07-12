@@ -25,7 +25,7 @@ paralelo).
   provedor + normalizadores com fixtures (SPEC-004), backfill de 1 temporada
   da Série A (SPEC-005 parcial), MVs de agregados (SPEC-009 parcial), 5
   queries analíticas respondendo as perguntas-exemplo direto no SQL.
-- **Decisões**: confirmar Drizzle/Neon na prática; granularidade real dos
+- **Decisões**: confirmar Drizzle/Supabase na prática; granularidade real dos
   eventos.
 - **Testes**: normalizadores 100 % cobertos por fixtures; agregados validados
   à mão contra 10 partidas assistidas.
