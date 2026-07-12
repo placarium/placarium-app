@@ -5,6 +5,30 @@ reviews:
   auto_review:
     enabled: true
     drafts: false
+  auto_apply_labels: true
+  labeling_instructions:
+    - label: "fix"
+      instructions: "Aplique quando a PR corrige comportamento incorreto (bug) — commits tipo fix:."
+    - label: "feature"
+      instructions: "Aplique quando a PR adiciona funcionalidade nova que não existia."
+    - label: "improvement"
+      instructions: "Aplique quando a PR faz polimento de UX/DX do que já existe, sem ser bug, refactor nem performance."
+    - label: "refactor"
+      instructions: "Aplique quando a PR reorganiza código sem mudar comportamento observável."
+    - label: "performance"
+      instructions: "Aplique quando a PR otimiza velocidade ou custo — latência, bundle, queries, tokens de IA."
+    - label: "test"
+      instructions: "Aplique quando a PR é dominada por cobertura de teste (vitest, unit/integração)."
+    - label: "security"
+      instructions: "Aplique quando a PR toca vulnerabilidade, auth, permissões ou LGPD."
+    - label: "docs"
+      instructions: "Aplique quando a PR muda majoritariamente documentação, specs ou ADRs (docs/, AGENTS.md, README)."
+    - label: "infra"
+      instructions: "Aplique quando a PR mexe em CI, deploy, tooling, docker-compose ou configuração de serviço."
+    - label: "chore"
+      instructions: "Aplique para manutenção rotineira sem efeito de produto — bump de dependência, configuração menor."
+    - label: "database"
+      instructions: "Aplique quando a PR toca packages/db: schema Drizzle, migrations, seeds ou queries compartilhadas."
   path_instructions:
     - path: "packages/core/**"
       instructions: "Domínio puro: rejeite qualquer I/O (fetch, banco, process.env). Funções puras e determinísticas; normalizadores precisam de teste com fixture real."
@@ -18,3 +42,7 @@ reviews:
       instructions: "Jobs idempotentes (dedup_key); raw_snapshot antes de normalizar; retry/backoff via BullMQ; proibido catch silencioso e estado em memória entre jobs."
 chat:
   auto_reply: true
+knowledge_base:
+  linear:
+    usage: "enabled"
+    team_keys: ["PLA"]
